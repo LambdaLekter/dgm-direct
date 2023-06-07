@@ -8,11 +8,11 @@ module.exports = {
 
     addUser: (req, res) => {
         User.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
             friends: []
         }).then(r => res.json(r))
     },

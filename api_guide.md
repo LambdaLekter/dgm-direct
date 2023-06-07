@@ -8,11 +8,11 @@
     Method: POST \
     URL: _host_ / users / addUser \
     body: { \
-    "username"  : "...", \
-    "email"     : "..." \
-    "password"  : "...", \
     "firstName" : "...", \
-    "lastName"  : "..." \
+    "lastName"  : "...", \
+    "username"  : "...", \
+    "email"     : "...", \
+    "password"  : "..." \
     }
 
 * ### Aggiungere un amico alla lista di un utente

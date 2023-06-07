@@ -6,26 +6,39 @@ import {faUser, faAt, faLock} from '@fortawesome/free-solid-svg-icons';
 import '../style/form.css'
 
 export default function SignUpForm() {
-    const [nome, setNome] = useState('')
-    const [cognome, setCognome] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [user, setUser] = useState({nome: '', cognome: '', username: '', email: '', password: ''})
+    const [user, setUser] = useState({firstName: '', lastName: '', username: '', email: '', password: ''})
+
+    const [validated, setValidated] = useState(false);
 
     const handleSubmit = e => {
         console.log("Invio form riuscito")
+
+        // Validazione input del form client-side
+        const form = e.currentTarget
+        if (!form.checkValidity()) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+        setValidated(true)
+
+        // TODO - Scrittura del nuovo utente su database
         if (password === confirmPassword) {
             setUser({
-                nome: {nome},
-                cognome: {cognome},
+                firstName: {firstName},
+                lastName: {lastName},
                 username: {username},
                 email: {email},
                 password: {password}
             })
             alert("Registrazione effettuata correttamente")
-            // ! Redirect alla pagina di profilo o alla Home con le varie chat
+
+            // TODO Redirect alla pagina di profilo o alla Home con le varie chat
         } else {
             e.preventDefault()
             alert("Le password inserite sono diverse")
@@ -38,52 +51,63 @@ export default function SignUpForm() {
                 <Container fluid="md">
                     <Row className="justify-content-center">
                         <Col>
-                            <Form className="bg-white p-4 pb-2 rounded-4" onSubmit={handleSubmit}>
+                            <Form className="bg-white p-4 pb-2 rounded-4" noValidate validated={validated}
+                                  onSubmit={handleSubmit}>
                                 <h2 align="center">Registrati sulla piattaforma</h2>
                                 <Row className="mb-2">
                                     <Col className="my-1">
-                                        <FloatingLabel
-                                            controlId="floatingInput"
-                                            label="Nome">
-                                            <Form.Control type="text" id="inputNome" placeholder="Inserire nome"
-                                                          onChange={e => setNome(e.target.value)}/>
+                                        <FloatingLabel controlId="floatingInput" label="Nome">
+                                            <Form.Control type="text"
+                                                          id="inputNome"
+                                                          placeholder="Inserire nome"
+                                                          value={firstName}
+                                                          onChange={e => setFirstName(e.target.value)}
+                                                          required
+                                            />
                                         </FloatingLabel>
                                     </Col>
 
                                     <Col className="my-1">
-                                        <FloatingLabel
-                                            controlId="floatingInput"
-                                            label="Cognome">
-                                            <Form.Control type="text" id="inputCognome" placeholder="Inserire cognome"
-                                                          onChange={e => setCognome(e.target.value)}/>
+                                        <FloatingLabel controlId="floatingInput" label="Cognome">
+                                            <Form.Control type="text"
+                                                          id="inputCognome"
+                                                          placeholder="Inserire cognome"
+                                                          value={lastName}
+                                                          onChange={e => setLastName(e.target.value)}
+                                                          required
+                                            />
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
 
                                 <Row>
                                     <Col className="my-1">
-                                        <InputGroup className="mb-2">
+                                        <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
-                                            <FloatingLabel
-                                                controlId="floatingInput"
-                                                label="Username">
-                                                <Form.Control type="text" id="inputUsername"
+                                            <FloatingLabel controlId="floatingInput" label="Username">
+                                                <Form.Control type="text"
+                                                              id="inputUsername"
                                                               placeholder="Inserire username"
-                                                              onChange={e => setUsername(e.target.value)}/>
+                                                              value={username}
+                                                              onChange={e => setUsername(e.target.value)}
+                                                              required
+                                                />
                                             </FloatingLabel>
                                         </InputGroup>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col className="my-1">
-                                        <InputGroup className="mb-2">
+                                        <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faAt}/></InputGroup.Text>
-                                            <FloatingLabel
-                                                controlId="floatingInput"
-                                                label="Email">
-                                                <Form.Control type="email" id="inputEmail"
+                                            <FloatingLabel controlId="floatingInput" label="Email">
+                                                <Form.Control type="email"
+                                                              id="inputEmail"
                                                               placeholder="Inserire indirizzo email"
-                                                              onChange={e => setEmail(e.target.value)}/>
+                                                              value={email}
+                                                              onChange={e => setEmail(e.target.value)}
+                                                              required
+                                                />
                                             </FloatingLabel>
                                         </InputGroup>
                                     </Col>
@@ -92,13 +116,15 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2">
                                             <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
-                                            <FloatingLabel
-                                                controlId="floatingInput"
-                                                label="Password">
-                                                <Form.Control type="password" id="inputPassword"
+                                            <FloatingLabel controlId="floatingInput" label="Password">
+                                                <Form.Control type="password"
+                                                              id="inputPassword"
                                                               placeholder="Inserire password"
+                                                              value={password}
                                                               onChange={e => setPassword(e.target.value)}
-                                                              aria-describedby="passwordHelpBlock"/>
+                                                              aria-describedby="passwordHelpBlock"
+                                                              required
+                                                />
                                                 {/*<Form.Text id="passwordHelpBlock" muted>*/}
                                                 {/*    La password deve essere lunga 8-20 caratteri, contenere leggere e numeri*/}
                                                 {/*    e non deve contenere spazi, caratteri speciali o emoticon.*/}
@@ -109,13 +135,15 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2">
                                             <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
-                                            <FloatingLabel
-                                                controlId="floatingInput"
-                                                label="Ripeti password">
-                                                <Form.Control type="password" id="inputConfirmPassword"
+                                            <FloatingLabel controlId="floatingInput" label="Ripeti password">
+                                                <Form.Control type="password"
+                                                              id="inputConfirmPassword"
                                                               placeholder="Ripeti password"
+                                                              value={confirmPassword}
                                                               onChange={e => setConfirmPassword(e.target.value)}
-                                                              aria-describedby="passwordHelpBlock"/>
+                                                              aria-describedby="passwordHelpBlock"
+                                                              required
+                                                />
                                                 {/*<Form.Text id="passwordHelpBlock" muted>*/}
                                                 {/*    La password deve essere lunga 8-20 caratteri, contenere leggere e numeri*/}
                                                 {/*    e non deve contenere spazi, caratteri speciali o emoticon.*/}
