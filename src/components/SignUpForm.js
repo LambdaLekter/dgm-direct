@@ -16,7 +16,7 @@ export default function SignUpForm() {
 
     const [validated, setValidated] = useState(false);
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         console.log("Invio form riuscito")
 
         // Validazione input del form client-side
@@ -29,14 +29,29 @@ export default function SignUpForm() {
 
         // TODO - Scrittura del nuovo utente su database
         if (password === confirmPassword) {
-            setUser({
-                firstName: {firstName},
-                lastName: {lastName},
-                username: {username},
-                email: {email},
-                password: {password}
-            })
-            alert("Registrazione effettuata correttamente")
+            try {
+                const res= await fetch('/addUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "firstName" : firstName,
+                        "lastName": lastName,
+                        "username": username,
+                        "email" : email,
+                        "password" : password}),
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    console.log("Utente creato con successo: ", data.user);
+                } else {
+                    console.log("Errore durante la creazione dell'utente: ", data.error);
+                }
+            } catch (error) {
+                console.log("Errore di rete: ", error);
+            }
 
             // TODO Redirect alla pagina di profilo o alla Home con le varie chat
         } else {
