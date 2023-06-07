@@ -1,4 +1,4 @@
-import './App.css'
+import './style/App.css'
 import {Routes, Route} from 'react-router-dom'
 import Authentication from "./pages/Authentication"
 import ChatPage from "./pages/ChatPage"
