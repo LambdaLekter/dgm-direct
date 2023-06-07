@@ -9,11 +9,16 @@ module.exports = {
     addUser: (req, res) => {
         User.create({
             username: req.body.username,
+            email: req.body.email,
             password: req.body.password,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             friends: []
         }).then(r => res.json(r))
+    },
+
+    validateLogin:  (req, res) => {
+
     },
 
     addFriendToUser: async (req, res) => {
