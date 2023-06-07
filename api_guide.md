@@ -9,6 +9,7 @@
     URL: _host_ / users / addUser \
     body: { \
     "username"  : "...", \
+    "email"     : "..." \
     "password"  : "...", \
     "firstName" : "...", \
     "lastName"  : "..." \
@@ -35,13 +36,15 @@
     Method: POST \
     URL: _host_ / messages / addMessage \
     body: { \
-    "author"  : "...", \
-    "receiver"  : "...", \
+    "author"  : [_ObjectID_], \
+    "receiver"  : [_ObjectID_], \
     "text" : "...", \
-    "time"  : "..." \
+    "time"  : [_Date_] \
     }
 
 * ### Estrarre una chat (lista di messaggi) a partire dagli username di mittente e destinatario
     Method: POST \
-    URL: _host_ / messages / :author / :receiver \
-    body: null
+    URL: _host_ / messages / :user1 / :user2 \
+    body: null \
+    ( _user1_ e _user2_ sono gli username degli utenti
+    fra cui avviene la comunicazione )
