@@ -26,37 +26,30 @@ export default function SignUpForm() {
         }
         setValidated(true)
 
-        // TODO - Scrittura del nuovo utente su database
         if (password === confirmPassword) {
-            try {
-                const res= await fetch('/addUser', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        "firstName" : firstName,
-                        "lastName": lastName,
-                        "username": username,
-                        "email" : email,
-                        "password" : password}),
+            console.log("Aggiunta di un utente")
+
+            const newUser = {
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
+                email: email,
+                password: password
+            };
+
+            axios.post('http://localhost:3001/users/addUser', newUser)
+                .then(res => {
+                    console.log("Utente creato con successo")
+                    console.log(res.data)
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-                const data = await res.json();
-
-                if (res.ok) {
-                    console.log("Utente creato con successo: ", data.user);
-                } else {
-                    console.log("Errore durante la creazione dell'utente: ", data.error);
-                }
-            } catch (error) {
-                console.log("Errore di rete: ", error);
-            }
-
-            // TODO Redirect alla pagina di profilo o alla Home con le varie chat
         } else {
-            e.preventDefault()
             alert("Le password inserite sono diverse")
         }
+
+        // TODO Redirect alla Home con le varie chat
     }
 
     return (
@@ -70,7 +63,7 @@ export default function SignUpForm() {
                                 <h2 align="center">Registrati sulla piattaforma</h2>
                                 <Row className="mb-2">
                                     <Col className="my-1">
-                                        <FloatingLabel controlId="floatingInput" label="Nome">
+                                        <FloatingLabel label="Nome">
                                             <Form.Control type="text"
                                                           id="inputNome"
                                                           placeholder="Inserire nome"
@@ -82,7 +75,7 @@ export default function SignUpForm() {
                                     </Col>
 
                                     <Col className="my-1">
-                                        <FloatingLabel controlId="floatingInput" label="Cognome">
+                                        <FloatingLabel label="Cognome">
                                             <Form.Control type="text"
                                                           id="inputCognome"
                                                           placeholder="Inserire cognome"
@@ -98,7 +91,7 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
-                                            <FloatingLabel controlId="floatingInput" label="Username">
+                                            <FloatingLabel label="Username">
                                                 <Form.Control type="text"
                                                               id="inputUsername"
                                                               placeholder="Inserire username"
@@ -114,7 +107,7 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faAt}/></InputGroup.Text>
-                                            <FloatingLabel controlId="floatingInput" label="Email">
+                                            <FloatingLabel label="Email">
                                                 <Form.Control type="email"
                                                               id="inputEmail"
                                                               placeholder="Inserire indirizzo email"
@@ -130,7 +123,7 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2">
                                             <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
-                                            <FloatingLabel controlId="floatingInput" label="Password">
+                                            <FloatingLabel label="Password">
                                                 <Form.Control type="password"
                                                               id="inputPassword"
                                                               placeholder="Inserire password"
@@ -149,7 +142,7 @@ export default function SignUpForm() {
                                     <Col className="my-1">
                                         <InputGroup className="mb-2">
                                             <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
-                                            <FloatingLabel controlId="floatingInput" label="Ripeti password">
+                                            <FloatingLabel label="Ripeti password">
                                                 <Form.Control type="password"
                                                               id="inputConfirmPassword"
                                                               placeholder="Ripeti password"

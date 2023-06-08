@@ -1,5 +1,6 @@
 const express = require("express")
 const mongoose= require("mongoose")
+const cors = require("cors")
 const usersRouter = require('./routes/users')
 const messagesRouter = require('./routes/messages')
 
@@ -13,9 +14,11 @@ const app = express()
 const port = 3001
 
 app.use(express.json())
+app.use(cors())
 app.use('/users', usersRouter)
 app.use('/messages', messagesRouter)
 
 app.listen(port, () => {
     console.log(`Server in ascolto sulla porta ${port}`)
+    console.log("CORS abilitato su tutti i percorsi")
 })

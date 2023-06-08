@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 
 router.post('/addUser', usersController.addUser)
 router.post('/addFriend', usersController.addFriendToUser)
+router.post('/getFriends/:username', usersController.getFriendsByUsername)
 router.post('/:username', usersController.getUserByUsername)
 
 module.exports = router
