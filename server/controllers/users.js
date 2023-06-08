@@ -7,7 +7,6 @@ module.exports = {
     },
 
     addUser: (req, res) => {
-        console.log("[DEBUG] Adding user")
         User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -17,7 +16,6 @@ module.exports = {
             friends: []
         }).then(r => res.json(r))
     },
-
 
     addFriendToUser: async (req, res) => {
         try {
@@ -33,15 +31,13 @@ module.exports = {
         }
     },
 
-    getFriendsByUsername: async (req, res) => {
-        let user = await User.findOne({username: req.params.username})
-        let friendUsers = user.friends.map(friendId => {
-            let friendUser = null
-            User.findOne({_id: friendId})
-                .then(user => friendUser = user)
-            return friendUser
-        })
-        console.log(friendUsers.toString())
-        res.json(friendUsers)
+    getFriendsByUsername: (req, res) => {
+        User.findOne({username: req.params.username})
+            .then( user => {
+                let usersPromises = user.friends.map( friendId => User.findOne({_id: friendId}) )
+                Promise.all(usersPromises).then( users => {
+                    res.json(users)
+                } )
+            } )
     }
 }
