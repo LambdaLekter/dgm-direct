@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import axios from 'axios';
 import {Container, Form, Button, FloatingLabel, Col, Row, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt, faLock} from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +16,12 @@ export default function SignUpForm() {
 
     const [validated, setValidated] = useState(false);
 
-    const handleSubmit = async (e) => {
-        console.log("Invio form riuscito")
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
         // Validazione input del form client-side
         const form = e.currentTarget
         if (!form.checkValidity()) {
-            e.preventDefault()
             e.stopPropagation()
         }
         setValidated(true)
