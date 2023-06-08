@@ -2,13 +2,14 @@ import './style/App.css'
 import {Routes, Route} from 'react-router-dom'
 import Authentication from "./pages/Authentication"
 import ChatPage from "./pages/ChatPage"
+import ChatPageTest from "./pages/ChatPageTest"
 
 function App() {
     return (
         <>
             <Routes>
                 <Route path="/" element={<ChatPage/>}/>
-                <Route path="/chat" element={<ChatTest/>}/>
+                <Route path="/chat" element={<ChatPageTest/>}/>
                 <Route path="/login" element={<Authentication login={true}/>}/>
                 <Route path="/signup" element={<Authentication login={false}/>}/>
             </Routes>
