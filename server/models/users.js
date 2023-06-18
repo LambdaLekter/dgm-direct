@@ -4,8 +4,8 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     firstName: String,
     lastName: String,
-    username: String,
-    email: String,
+    username: { type: String, unique: true },
+    email: { type: String, match: '^[w-.]+@([w-]+.)+[w-]{2,4}$' },
     password: String,
     friends: [{type: Schema.Types.ObjectId, ref: "User"}]
 })

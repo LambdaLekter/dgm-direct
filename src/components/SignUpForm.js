@@ -37,7 +37,7 @@ export default function SignUpForm() {
                 password: password
             };
 
-            axios.post('http://localhost:3001/users/addUser', newUser)
+            axios.post('http://localhost:3001/api/users/addUser', newUser)
                 .then(res => {
                     console.log("Utente creato con successo")
                     console.log(res.data)

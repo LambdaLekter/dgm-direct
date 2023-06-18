@@ -19,11 +19,23 @@ module.exports = {
 
     addFriendToUser: async (req, res) => {
         try {
-            let user = await User.findOne({username: req.body.username})
             let friend = await User.findOne({username: req.body.newFriend})
-            let update = await User.updateOne(
-                {_id: user._id},
+            let update = await User.findOneAndUpdate(
+                {username: req.body.username},
                 {$push: {friends: friend._id}}
+            )
+            res.json(update)
+        } catch (err) {
+            res.send(`<h1>${err}</h1>`)
+        }
+    },
+
+    removeFriendFromUser: async (req, res) => {
+        try {
+            let friend = await User.findOne({username: req.body.friend})
+            let update = await User.findOneAndUpdate(
+                {username: req.body.username},
+                {$pull: {friends: friend._id}}
             )
             res.json(update)
         } catch (err) {
