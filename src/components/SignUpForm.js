@@ -48,8 +48,6 @@ export default function SignUpForm() {
         } else {
             alert("Le password inserite sono diverse")
         }
-
-        // TODO Redirect alla Home con le varie chat
     }
 
     return (

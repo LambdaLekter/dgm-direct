@@ -6,7 +6,9 @@ module.exports = {
             .then(r => res.json(r))
     },
 
-    addUser: (req, res) => {
+    addUser: async (req, res) => {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
         User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -45,11 +47,27 @@ module.exports = {
 
     getFriendsByUsername: (req, res) => {
         User.findOne({username: req.params.username})
-            .then( user => {
-                let usersPromises = user.friends.map( friendId => User.findOne({_id: friendId}) )
-                Promise.all(usersPromises).then( users => {
+            .then(user => {
+                let usersPromises = user.friends.map(friendId => User.findOne({_id: friendId}))
+                Promise.all(usersPromises).then(users => {
                     res.json(users)
-                } )
-            } )
+                })
+            })
+    },
+
+    validateLogin: async (req, res) => {
+        const user = await User.findOne({username: req.body.username})
+
+        if (!user) {
+            return res.status(404).json({ error: 'Utente non trovato' });
+        } else {
+            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+
+            if (!isPasswordValid) {
+                return res.status(401).json({error: 'Password non valida'});
+            }
+
+            res.status(200).json({message: 'Accesso effettuato con successo'})
+        }
     }
 }
