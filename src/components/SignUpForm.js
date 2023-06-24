@@ -1,10 +1,12 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {Container, Form, Button, FloatingLabel, Col, Row, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faAt, faLock} from '@fortawesome/free-solid-svg-icons';
 import '../style/form.css'
+
+import Cookies from 'universal-cookie'
 
 export default function SignUpForm() {
     const [firstName, setFirstName] = useState('')
@@ -15,6 +17,16 @@ export default function SignUpForm() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const [validated, setValidated] = useState(false);
+    const navigate = useNavigate()
+    const cookies = new Cookies();
+
+    useEffect(() => {
+        // Verifica se il cookie è impostato
+        if(cookies.get("username")) {
+            console.log(cookies.get("username"))
+            navigate("/chat");
+        }
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -45,6 +57,8 @@ export default function SignUpForm() {
                 .catch(error => {
                     console.error(error);
                 });
+
+            navigate("/chat");
         } else {
             alert("Le password inserite sono diverse")
         }

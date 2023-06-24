@@ -1,25 +1,58 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
+
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Form, Button, FloatingLabel, Col, Row, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 
-export default function LoginForm(props) {
+import Cookies from 'universal-cookie'
+
+export default function LoginForm(props) { // eslint-disable-next-line
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [validated, setValidated] = useState(false);
 
+    const navigate = useNavigate()
+    const cookies = new Cookies();
+
+    useEffect(() => {
+        // Verifica se il cookie è impostato
+        if(cookies.get("username")) {
+            console.log(cookies.get("username"))
+            navigate("/chat");
+        }
+    })
+
     const handleSubmit = e => {
-        console.log("Invio form riuscito")
+        e.preventDefault();
+
         const form = e.currentTarget
         if (!form.checkValidity()) {
-            e.preventDefault();
             e.stopPropagation()
         }
         setValidated(true)
-        // TODO - Verifica del login dal database
+
+        // Verifica del login dal database
+        const user = {
+            username: username,
+            password: password
+        };
+
+        axios.post('http://localhost:3001/api/users/login', user)
+            .then(res => {
+                console.log("Login effettuato")
+                console.log(res.data)
+
+                cookies.set("username", username, { path: "/", maxAge: 14400})
+                navigate("/chat");
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
+
     return (
         <>
             <div className="login-form d-flex align-items-center vh-100">
@@ -32,9 +65,7 @@ export default function LoginForm(props) {
                                     <Row className="mb-2">
                                         <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
-                                            <FloatingLabel
-                                                controlId="floatingInput"
-                                                label="Username o email">
+                                            <FloatingLabel label="Username o email">
                                                 <Form.Control type="text" id="inputUsername"
                                                               placeholder="Inserire username o email"
                                                               value={username}
@@ -48,7 +79,7 @@ export default function LoginForm(props) {
                                     <Row className="mb-2">
                                         <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
-                                            <FloatingLabel controlId="floatingInput" label="Password">
+                                            <FloatingLabel label="Password">
                                                 <Form.Control
                                                     type="password"
                                                     id="inputPassword"

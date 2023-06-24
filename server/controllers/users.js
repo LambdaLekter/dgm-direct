@@ -1,4 +1,5 @@
 const User = require('../models/users')
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     getUserByUsername: (req, res) => {
@@ -14,7 +15,8 @@ module.exports = {
             lastName: req.body.lastName,
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password,
+            //password: req.body.password,
+            password: hashedPassword,
             friends: []
         }).then(r => res.json(r))
     },
