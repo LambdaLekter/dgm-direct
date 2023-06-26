@@ -20,22 +20,42 @@
 }
 
 #messages {
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: left;
+  max-height: 80%;
+  overflow: hidden;
 }
 
 #message-bar {
+  margin-top: 10px;
+}
 
+#message-bar button {
+  margin-left: 10px;
+  border-radius: 5px;
 }
 
 .message-item {
+  max-width: 70%;
+  padding: 5px 15px 5px 15px;
+  color: antiquewhite;
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: dimgrey;
+  border-radius: 3px;
+  box-shadow: #282c34 3px 3px 5px;
 }
 
 .msg-author {
-  font-size: calc(15px + 2vmin);
+  font-size: calc(5px + 2vmin);
+  color: darkseagreen;
+  font-weight: bold;
+}
+
+.msg-author ~ div {
+  font-size: calc(10px + 2vmin);
 }
 
 .left {

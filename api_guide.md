@@ -31,6 +31,19 @@
   "friend": "..." \
   }
 
+* ### Estrarre gli amici di un utente a partire dal suo username
+  Method: POST \
+  URL: _host_ / api / users / getFriends / :username \
+  body: null
+
+* ### Verifica le credenziali di un utente
+  Method: POST \
+  URL: _host_ / api / users / login \
+  body: { \
+  "username": "...", \
+  "password": "..." \
+  }
+
 * ### Estrarre le informazioni di un utente a partire dal suo username
   Method: POST \
   URL: _host_ / api / users / :username \
@@ -47,7 +60,7 @@
   "author"  : [_ObjectID_], \
   "receiver"  : [_ObjectID_], \
   "text" : "...", \
-  "time"  : [_Date_] \
+  "time"  : [_ms_] \
   }
 
 * ### Estrarre una chat (lista di messaggi) a partire dagli username di mittente e destinatario

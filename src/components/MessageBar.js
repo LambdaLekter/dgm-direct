@@ -2,8 +2,8 @@
 export default function MessageBar({submitHandler}) {
     return <div id="message-bar">
         <form action="" onSubmit={submitHandler}>
-            <input type="text" />
-            <button>Send</button>
+            <input id="message-bar-input" type="text" />
+            <button type="submit"> => </button>
         </form>
     </div>
 }

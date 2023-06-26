@@ -1,29 +1,44 @@
 import React, {useState} from "react";
 import ChatsBar from "../components/ChatsBar";
 import Chat from "../components/Chat";
+import axios from "axios";
+
+const init_loggedUser = "fratm"
+const init_receiver = "sorm"
+const init_chats = [
+    {user: "Domenico"},
+    {user: "Michele"}
+]
+const init_messages = (user1, user2, setMessages) => {
+    axios.post(`http://localhost:3001/api/messages/${user1}/${user2}`)
+        .then(res => {
+            setMessages(res.data)
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 
 export default function ChatPage() {
-    const init_loggedUser = "Giuseppe"
     const [loggedUser, setLoggedUser] = useState(init_loggedUser)
+    const [receiver, setReceiver] = useState(init_receiver)
+    const [messages, setMessages] = useState([])
 
-    const init_chats = [
-        {user: "Domenico"},
-        {user: "Michele"}
-    ]
-    const init_messages = [
-        {text: "MSG1", author: "Giuseppe"},
-        {text: "MSG2", author: "Giuseppe"},
-        {text: "MSG3", author: "Domenico"},
-        {text: "MSG4", author: "Giuseppe"},
-        {text: "MSG5", author: "Domenico"}
-    ]
+    init_messages(loggedUser, receiver, setMessages)
 
     return (
         <>
             <div className="App">
                 <ChatsBar chats_list={init_chats}/>
-                <Chat messages={init_messages} loggedUser={loggedUser}/>
+                <Chat
+                    messages={messages}
+                    setMessages={setMessages}
+                    loggedUser={loggedUser}
+                    receiver={receiver}
+                />
             </div>
         </>
     )
 }
+
+// TODO prendere il loggedUser dalla sessione
