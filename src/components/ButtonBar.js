@@ -1,9 +1,11 @@
-import ChatItem from "./ChatItem";
+export default function ButtonBar({setSelectedTab}) {
+    const getHandler = (tab) => {
+        return () => { setSelectedTab(tab) }
+    }
 
-export default function ButtonBar() {
     return <div id="button-bar">
-        <button>C</button>
-        <button>F</button>
-        <button>N</button>
+        <button onClick={getHandler("C")}>Chat</button>
+        <button onClick={getHandler("F")}>Amici</button>
+        <button onClick={getHandler("N")}>Notifiche</button>
     </div>
 }

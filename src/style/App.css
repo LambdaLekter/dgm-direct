@@ -18,6 +18,16 @@
   margin-bottom: 20px;
 }
 
+#friends-bar {
+  padding: 30px;
+  flex-grow: 1;
+}
+
+#friends-bar h3 {
+  font-style: oblique;
+  margin-bottom: 20px;
+}
+
 #chat {
   flex-grow: 6;
   background-color: #383c44;
