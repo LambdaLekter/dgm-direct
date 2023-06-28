@@ -16,7 +16,7 @@ const init_chats = [
 ]
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("")
+    const [loggedUser, setLoggedUser] = useState("fratm")
     const [receiver, setReceiver] = useState("sorm")
     const [friends, setFriends] = useState([])
     const [messages, setMessages] = useState([])
@@ -24,7 +24,7 @@ export default function ChatPage() {
     const cookies = new Cookies();
     const navigate = useNavigate();
 
-    useEffect(async () => {
+    useEffect(() => {
         // Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
         if(!cookies.get("username")) {
             console.log("Login non effettuato. Reindirizzamento...")
@@ -32,15 +32,19 @@ export default function ChatPage() {
         } else {
             setLoggedUser(cookies.get("username"))
 
-            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
-            let friends = res.data
-            setFriends(friends)
-            setReceiver(friends[0].username)
+            let init = async () => {
+                let res = await axios.post(`http://localhost:3001/api/users/getFriends/${loggedUser}`)
+                let friends = res.data
+                setFriends(friends)
 
-            res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
-            setMessages(res.data)
+                if(friends.length > 0) setReceiver(friends[0].username)
+
+                res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
+                setMessages(res.data)
+            }
+            init()
         }
-    })
+    }, [])
 
     return (
         <>
@@ -62,3 +66,5 @@ export default function ChatPage() {
         </>
     )
 }
+
+// TODO gestire la situazione senza amici

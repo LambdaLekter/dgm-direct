@@ -3,7 +3,7 @@ import MessageBar from "./MessageBar";
 import axios from "axios";
 
 export default function Chat({messages, setMessages, loggedUser, receiver}) {
-    let sendMessage = event => {
+    let sendMessage = (event) => {
         event.preventDefault()
         let msgInput = document.getElementById("message-bar-input")
         let msgText = msgInput.value
