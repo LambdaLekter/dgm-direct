@@ -4,10 +4,10 @@ import axios from "axios";
 export default function FriendsBar({friends, setFriends, loggedUser}) {
     const onAddFriend = (event) => {
         event.preventDefault()
-        let new_friend_input = event.target.firstElementChild
+        let friend_input = event.target.firstElementChild
         let body = {
             username: loggedUser,
-            newFriend: new_friend_input.value
+            newFriend: friend_input.value
         }
         axios.post(`http://localhost:3001/api/users/addFriend`, body)
             .then(res => {
@@ -17,6 +17,7 @@ export default function FriendsBar({friends, setFriends, loggedUser}) {
             .catch(error => {
                 console.error(error);
             });
+        friend_input.value = ""
     }
 
     return <div id="friends-bar">

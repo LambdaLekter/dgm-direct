@@ -8,11 +8,11 @@ import ButtonBar from "../components/ButtonBar";
 import FriendsBar from "../components/FriendsBar";
 
 const init_chats = [
-    {user: "Domenico"},
-    {user: "Michele"},
-    {user: "Giuseppe"},
-    {user: "Francescomaria"},
-    {user: "Filippo"}
+    {user: {username: "Domenico"}},
+    {user: {username: "Michele"}},
+    {user: {username: "Giuseppe"}},
+    {user: {username: "Francescomaria"}},
+    {user: {username: "Filippo"}}
 ]
 
 export default function ChatPage() {
@@ -49,7 +49,7 @@ export default function ChatPage() {
     return (
         <>
             <div className="App">
-                <ButtonBar setSelectedTab={setSelectedTab}/>
+                <ButtonBar setSelectedTab={setSelectedTab} setLoggedUser={setLoggedUser} />
 
                 { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */ }
                 { selectedTab === "F" && <FriendsBar friends={friends} setFriends={setFriends} loggedUser={loggedUser} /> }
@@ -68,3 +68,4 @@ export default function ChatPage() {
 }
 
 // TODO gestire la situazione senza amici
+// TODO aggiungere un caricamento prima che i messaggi vengano visualizzati
