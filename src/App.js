@@ -9,7 +9,8 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ChatPage/>}/>
-                <Route path="/chat" element={<ChatPageTest/>}/>
+                <Route path="/chatFinale" element={<ChatPageTest/>}/>
+                <Route path="/chat" element={<ChatPage/>}/>
                 <Route path="/login" element={<Authentication login={true}/>}/>
                 <Route path="/signup" element={<Authentication login={false}/>}/>
             </Routes>
