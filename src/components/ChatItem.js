@@ -1,6 +1,6 @@
 
-export default function ChatItem({chatData}) {
+export default function ChatItem({chatUser: user}) {
     return <div className="chat-item">
-        <p>{chatData.user}</p>
+        <p>{user.username}</p>
     </div>
 }

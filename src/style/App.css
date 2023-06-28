@@ -13,10 +13,19 @@
   flex-grow: 1;
 }
 
+#chats-bar h3 {
+  font-style: oblique;
+  margin-bottom: 20px;
+}
+
 #chat {
   flex-grow: 6;
   background-color: #383c44;
   padding: 30px;
+}
+
+.chat-item {
+  margin-left: 10px;
 }
 
 #messages {
@@ -35,6 +44,18 @@
 #message-bar button {
   margin-left: 10px;
   border-radius: 5px;
+}
+
+#button-bar {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  background-color: #383c44;
+}
+
+#button-bar button {
+  margin-bottom: 10px;
 }
 
 .message-item {

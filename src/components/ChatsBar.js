@@ -1,10 +1,10 @@
 import ChatItem from "./ChatItem";
 
-export default function ChatsBar({chats_list}) {
+export default function ChatsBar({chats_list, loggedUser}) {
     return <div id="chats-bar">
-        <h3> DGM Direct </h3>
+        <h3> Chat di {loggedUser} </h3>
         {chats_list.map((chat, idx) =>
-            <ChatItem key={"chat" + idx} chatData={chat}/>
+            <ChatItem key={"chat" + idx} user={chat.user}/>
         )}
     </div>
 }
