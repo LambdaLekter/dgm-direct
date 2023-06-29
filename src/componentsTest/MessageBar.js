@@ -3,7 +3,7 @@
  * pagina della chat relativa a ciascun amico
  */
 
-import React, {useState} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Form, Button, InputGroup} from "react-bootstrap";
 
