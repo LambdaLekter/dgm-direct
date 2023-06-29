@@ -1,13 +1,13 @@
-import ChatItem from "./ChatsListItem";
+import ChatsListItem from "./ChatsListItem";
 
-export default function ChatsList({chats_list, loggedUser}) {
+export default function ChatsList({chats_list}) {
     return (
-        <div id="chats-bar">
-            {/* TODO: Inserire una navbar per il nome dell'utente */}
-            <h3> Chat di {loggedUser} </h3>
-            {chats_list.map((chat, idx) =>
-                <ChatItem key={"chat" + idx} chatUser={chat.user}/>
-            )}
-        </div>
+        <>
+            {
+                chats_list.map((chat, idx) =>
+                    <ChatsListItem key={"chat" + idx} user={chat.user}/>
+                )
+            }
+        </>
     )
 }

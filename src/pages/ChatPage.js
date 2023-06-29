@@ -5,7 +5,7 @@ import Chat from "../components/Chat";
 import axios from "axios";
 import Cookies from 'universal-cookie'
 import ButtonsBar from "../components/ButtonsBar";
-import FriendsBar from "../components/FriendsBar";
+import Sidebar from "../components/Sidebar";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
@@ -34,11 +34,6 @@ export default function ChatPage() {
             let friendsData = res.data
             setFriends(friendsData)
 
-            /*
-            res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
-            setMessages(res.data)
-            */
-
             if (friendsData.length > 0) {
                 const receiverUsername = friendsData[0].username
                 setReceiver(receiverUsername)
@@ -63,25 +58,22 @@ export default function ChatPage() {
     return (
         <>
             {/* TODO - Fissato il massimo scorrimento verticale, permettere lo scorrimento della sola chat*/}
-            <div className="vh-100">
+            <div>
                 <Container className="App" fluid>
                     <Row>
-                        <Col md={1} id="button-bar-div">
+                        <Col md={1} id="button-bar-div" >
                             <ButtonsBar setSelectedTab={setSelectedTab}/>
                         </Col>
 
                         <Col md={3} id="side-list">
-                            { /*TODO: Div per la lista delle chat o degli amici*/ }
+                            { /* TODO: Div per la lista delle chat o degli amici */}
                             { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
 
-                            {selectedTab === "F" &&
-                                <FriendsBar
-                                    friends={friends}
-                                    setFriends={setFriends}
-                                    loggedUser={loggedUser}
-                                    setFriendless={setFriendless} /> }
-                            {selectedTab === "C" && <ChatsList chats_list={init_chats} loggedUser={loggedUser}/>}
-                            {selectedTab === "N" && <div>Coming soon...</div>}
+                            <Sidebar
+                                loggedUser={loggedUser}
+                                selectedTab={selectedTab}
+                                friendsStates={friendsStates}
+                            />
                         </Col>
 
                         <Col md={6} id="chat">

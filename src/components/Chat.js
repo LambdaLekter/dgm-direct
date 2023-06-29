@@ -18,7 +18,6 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
             time: Date.now()
         };
 
-
         if (msgText !== "") {
             // * Controllo per inviare un messaggio solo qualora il campo di testo contenga qualcosa
 

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Cookie from 'universal-cookie'
 
-export default function Navbar(loggedUser) {
+export default function Navbar({loggedUser}) {
     const cookie = new Cookie()
 
     return (
@@ -9,7 +9,7 @@ export default function Navbar(loggedUser) {
             <div className="user">
                 {/*<img src={currentUser.photoURL} alt="" className="imgProfile"/>*/}
                 {/*<span>{cookie.get("Username")}</span>*/}
-                <span className="user">{loggedUser}</span>
+                <h4 className="user">{loggedUser}</h4>
             </div>
         </div>
     )

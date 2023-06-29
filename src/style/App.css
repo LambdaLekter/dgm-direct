@@ -3,26 +3,32 @@ html {
 }
 
 .App {
-    min-height: 100vh;
     color: white;
+    overflow-x: hidden;
+}
+
+.App::-webkit-scrollbar {
+    display: none;
 }
 
 #button-bar-div {
     z-index: 2;
-    background-color: #2a2a32
+    background-color: #2a2a32;
+    width: 100px;
 }
 
-#button-bar {
-    position: fixed;
-    left: 20px;
-    top: 10px;
+#button-bar-div {
+    z-index: 2;
+    background-color: #2a2a32;
+    width: 80px;
+    padding-top: 10px;
 }
 
 #side-list {
     z-index: 1;
     background-color: #343840;
     box-shadow: #202227 1px 0 7px;
-    padding: 20px 30px 0 30px;
+    height: 100vh;
 }
 
 #side-list h3 {
@@ -33,6 +39,7 @@ html {
 #friends-bar input[type="text"] {
     width: 90%
 }
+
 #friends-bar input[type="submit"] {
     width: 10%
 }
@@ -40,6 +47,12 @@ html {
 #chat {
     background-color: #42464e;
     flex: 1 1 auto;
+    height: 100vh;
+    overflow: scroll;
+}
+
+#chat::-webkit-scrollbar {
+    display: none;
 }
 
 .chat-item {
@@ -103,25 +116,55 @@ html {
     align-self: end;
 }
 
-/* Realizzazione della Navbar che mostra il nome dell'utente loggato */
+/* ---------------------------- */
+
+
+/* Navbar nel quale si mostra l'utente loggato */
 .navbar {
     display: flex;
     align-items: center;
-    background-color: #2f2d52;
-    height: 50px;
-    padding: 10px;
+    background-color: red;
+    height: 70px;
     justify-content: space-between;
-    color: #ddddf7;
 }
 
 .user {
+    padding-left: 10px;
     font-weight: bold;
 }
 
-.imgProfile {
-    background-color: #ddddf7;
-    height: 24px;
-    width: 24px;
+/* ---------------------------- */
+
+
+/* Elenco chat nella sidebar */
+.userChat {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.userChat:hover {
+    background-color: #7e7e83;
+}
+
+.userChat > img {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
+
+.userChatInfo > span {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.userChatInfo > p {
+    font-size: 14px;
+    color: lightgray;
+}
+
+/* ---------------------------- */
