@@ -6,10 +6,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
 export default function Chat({messages, setMessages, loggedUser, receiver}) {
-    let sendMessage = (event) => {
+    const sendMessage = (event) => {
         event.preventDefault()
-        let msgInput = document.getElementById("message-bar-input")
-        let msgText = msgInput.value
+        const msgInput = document.getElementById("message-bar-input")
+        const msgText = msgInput.value
 
         const message = {
             author: loggedUser,

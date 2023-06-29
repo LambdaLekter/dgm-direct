@@ -1,22 +1,36 @@
 .App {
-    background-color: #282c34;
+    background-color: #2a2a32;
     min-height: 100vh;
     font-size: calc(10px + 2vmin);
     color: white;
 }
 
-#chats-bar, #friends-bar {
-    padding: 30px;
-    flex-grow: 1;
+#button-bar-div {
+    z-index: 2;
+    background-color: #2a2a32
 }
 
-#chats-bar h3, #friends-bar h3 {
-    font-style: oblique;
+#button-bar {
+    position: fixed;
+    left: 20px;
+    top: 10px;
+}
+
+#side-list {
+    z-index: 1;
+    background-color: #343840;
+    box-shadow: #202227 1px 0 7px;
+    padding: 30px;
+}
+
+#side-list h3 {
+    font-family: Arial, serif;
     margin-bottom: 20px;
 }
 
 #chat {
-    background-color: #383c44;
+    background-color: #42464e;
+    flex: 1 1 auto
 }
 
 .chat-item {
@@ -44,7 +58,7 @@
     margin-bottom: 10px;
     background-color: dimgrey;
     border-radius: 3px;
-    box-shadow: #282c34 3px 3px 5px;
+    box-shadow: #282c34 2px 2px 7px;
 }
 
 .msg-author {

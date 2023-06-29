@@ -24,17 +24,17 @@ export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
     }
 
     return (
-        <Nav className="flex-column" style={{position: 'fixed', left: '20px', top: '10px'}}>
-            <Button variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("C")}>
+        <Nav id="button-bar" className="flex-column">
+            <Button title="Chat" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("C")}>
                 <FontAwesomeIcon icon={faComments}/>
             </Button>
-            <Button variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("F")}>
+            <Button title="Amici" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("F")}>
                 <FontAwesomeIcon icon={faUserGroup}/>
             </Button>
-            <Button variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("N")}>
+            <Button title="Notifiche" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("N")}>
                 <FontAwesomeIcon icon={faBell} shake/>
             </Button>
-            <Button variant="primary" size="md" className="rounded-circle mb-3" onClick={logout}>
+            <Button title="Logout" variant="primary" size="md" className="rounded-circle mb-3" onClick={logout}>
                 <FontAwesomeIcon icon={faArrowRightFromBracket}/>
             </Button>
 
@@ -57,7 +57,7 @@ export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
         //         </Button>
         //     </div>
         //
-        //     {/*TODO - Cambiare lo stato di attivo per i bottoni della sidebar*/}
+        //     {/*TODO - Cambiare lo stato di attivo per i bottoni della sidebar */}
         //     {/*TODO - Fissare i pulsanti della sidebar allo scorrimento*/}
         // </div>
     )
