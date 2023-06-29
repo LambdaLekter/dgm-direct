@@ -1,4 +1,4 @@
-import ChatItem from "./ChatItem";
+import ChatItem from "./ChatsListItem";
 import axios from "axios";
 
 export default function FriendsBar({friends, setFriends, loggedUser}) {
@@ -20,14 +20,16 @@ export default function FriendsBar({friends, setFriends, loggedUser}) {
         friend_input.value = ""
     }
 
-    return <div id="friends-bar">
-        <h3> Amici di {loggedUser} </h3>
-        <form onSubmit={onAddFriend}>
-            <input type="text" />
-            <input type="submit" value="+" />
-        </form>
-        {friends.map((friend, idx) =>
-            <ChatItem key={"friend" + idx} chatUser={friend}/>
-        )}
-    </div>
+    return (
+        <div id="friends-bar">
+            <h3> Amici di {loggedUser} </h3>
+            <form onSubmit={onAddFriend}>
+                <input type="text"/>
+                <input type="submit" value="+"/>
+            </form>
+            {friends.map((friend, idx) =>
+                <ChatItem key={"friend" + idx} chatUser={friend}/>
+            )}
+        </div>
+    )
 }
