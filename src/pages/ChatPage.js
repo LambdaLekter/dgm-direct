@@ -11,18 +11,19 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
 const init_chats = [
-    {user: "Domenico"},
-    {user: "Michele"},
-    {user: "Giuseppe"},
-    {user: "Francescomaria"},
-    {user: "Filippo"}
+    {user: {username: "Domenico"}},
+    {user: {username: "Michele"}},
+    {user: {username: "Giuseppe"}},
+    {user: {username: "Francescomaria"}},
+    {user: {username: "Filippo"}}
 ]
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("fratm")
+    const [loggedUser, setLoggedUser] = useState("")
     const [receiver, setReceiver] = useState("sorm")
     const [friends, setFriends] = useState([])
     const [messages, setMessages] = useState([])
+    const [friendless, setFriendless] = useState(false)
     const [selectedTab, setSelectedTab] = useState("C")
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -45,9 +46,17 @@ export default function ChatPage() {
 
             res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
             setMessages(res.data)
+
+            // if (friends.length > 0) {
+            //     setReceiver(friends[0].username)
+            //     res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
+            //     setMessages(res.data)
+            // } else {
+            //     setFriendless(true)
+            // }
         }
-        init()
-        // }
+
+        init().then(() => console.log("Inizializzazione effettuata"))
     }, [])
 
     return (
@@ -76,6 +85,7 @@ export default function ChatPage() {
                                 setMessages={setMessages}
                                 loggedUser={loggedUser}
                                 receiver={receiver}
+                                friendless={friendless}
                             />
                         </Col>
                     </Row>

@@ -5,7 +5,7 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
-export default function Chat({messages, setMessages, loggedUser, receiver}) {
+export default function Chat({messages, setMessages, loggedUser, receiver, friendless}) {
     const sendMessage = (event) => {
         event.preventDefault()
         const msgInput = document.getElementById("message-bar-input")
@@ -17,6 +17,7 @@ export default function Chat({messages, setMessages, loggedUser, receiver}) {
             text: msgText,
             time: Date.now()
         };
+
 
         if (msgText !== "") {
             // * Controllo per inviare un messaggio solo qualora il campo di testo contenga qualcosa
