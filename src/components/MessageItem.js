@@ -12,13 +12,14 @@ export default function MessageItem({message, side}) {
         }
         d = h + ":" + m;
         return d
+        window.setTimeout("showTime()", 1000);
     }
 
     return (
-        <div className={"message-item " + side}>
-            <div className="msg-author">{message.author}</div>
-            <div className="msg-text">{message.text}</div>
-            <div className="msg-clock">{showTime()}</div>
-        </div>
+            <div className={"message-item-" + side}>
+                <div className="msg-author">{message.author}</div>
+                <div className="message-content">{message.text}</div>
+                <div className="message-timestamp-right">{showTime()}</div>
+            </div>
     )
 }
