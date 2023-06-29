@@ -65,10 +65,12 @@
     font-size: calc(5px + 2vmin);
     color: darkseagreen;
     font-weight: bold;
+    font-family: "Helvetica Neue", sans-serif;
 }
 
 .msg-author ~ div {
     font-size: calc(10px + 2vmin);
+    font-family: "Helvetica Neue", sans-serif;
 }
 
 .left {
@@ -77,4 +79,34 @@
 
 .right {
     align-self: end;
+}
+
+/* Orario scritto in basso ad ogni messaggio */
+.clock {
+    color: #EFEFF3;
+    font-family: "Helvetica Neue", sans-serif;
+    text-align: right;
+}
+
+/* Realizzazione della Navbar che mostra il nome dell'utente loggato */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #2f2d52;
+    height: 50px;
+    padding: 10px;
+    justify-content: space-between;
+    color: #ddddf7;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.imgProfile {
+    background-color: #ddddf7;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    object-fit: cover;
 }
