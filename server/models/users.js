@@ -12,4 +12,4 @@ const userSchema = new Schema({
 
 module.exports = mongoose.model("User", userSchema)
 
-// TODO sistemare il controllo della mail
+// TODO: Sistemare il controllo della mail

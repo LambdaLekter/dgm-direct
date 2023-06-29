@@ -1,13 +1,13 @@
-import ChatItem from "./ChatItem";
+import ChatItem from "./ChatsListItem";
 import axios from "axios";
 
 export default function FriendsBar({friends, setFriends, loggedUser}) {
     const onAddFriend = (event) => {
         event.preventDefault()
-        let new_friend_input = event.target.firstElementChild
+        let friend_input = event.target.firstElementChild
         let body = {
             username: loggedUser,
-            newFriend: new_friend_input.value
+            newFriend: friend_input.value
         }
         axios.post(`http://localhost:3001/api/users/addFriend`, body)
             .then(res => {
@@ -17,16 +17,19 @@ export default function FriendsBar({friends, setFriends, loggedUser}) {
             .catch(error => {
                 console.error(error);
             });
+        friend_input.value = ""
     }
 
-    return <div id="friends-bar">
-        <h3> Amici di {loggedUser} </h3>
-        <form onSubmit={onAddFriend}>
-            <input type="text" />
-            <input type="submit" value="+" />
-        </form>
-        {friends.map((friend, idx) =>
-            <ChatItem key={"friend" + idx} chatUser={friend}/>
-        )}
-    </div>
+    return (
+        <div id="friends-bar">
+            <h3> Amici di {loggedUser} </h3>
+            <form onSubmit={onAddFriend}>
+                <input type="text"/>
+                <input type="submit" value="+"/>
+            </form>
+            {friends.map((friend, idx) =>
+                <ChatItem key={"friend" + idx} chatUser={friend}/>
+            )}
+        </div>
+    )
 }

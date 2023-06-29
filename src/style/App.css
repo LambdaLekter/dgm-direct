@@ -1,97 +1,84 @@
 .App {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
-#chats-bar {
-  padding: 30px;
-  flex-grow: 1;
+#chats-bar, #friends-bar {
+    padding: 30px;
+    flex-grow: 1;
 }
 
-#chats-bar h3 {
-  font-style: oblique;
-  margin-bottom: 20px;
-}
-
-#friends-bar {
-  padding: 30px;
-  flex-grow: 1;
-}
-
-#friends-bar h3 {
-  font-style: oblique;
-  margin-bottom: 20px;
+#chats-bar h3, #friends-bar h3 {
+    font-style: oblique;
+    margin-bottom: 20px;
 }
 
 #chat {
-  flex-grow: 6;
-  background-color: #383c44;
-  padding: 30px;
-
+    background-color: #383c44;
 }
 
 .chat-item {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 #messages {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
 }
 
+/* * Necessario per mantenere l'input text fisso*/
 #message-bar {
-  margin-top: 10px;
+    position: sticky;
+    bottom: 0;
+    padding: 10px;
 }
 
-#message-bar button {
-  margin-left: 10px;
-  border-radius: 5px;
-}
+/*#message-bar button {*/
+/*    margin-left: 10px;*/
+/*    border-radius: 5px;*/
+/*}*/
 
-#button-bar {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  background-color: #383c44;
-}
+/* TODO (per Para): Aggiungere un contenitore per la sidebar di colore grigio chiaro */
+/*#button-bar {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    background-color: #383c44;
+}*/
 
-#button-bar button {
-  margin-bottom: 10px;
-}
+/*#button-bar button {
+    margin-bottom: 10px;
+}*/
 
 .message-item {
-  max-width: 70%;
-  padding: 5px 15px 5px 15px;
-  color: antiquewhite;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: dimgrey;
-  border-radius: 3px;
-  box-shadow: #282c34 3px 3px 5px;
+    max-width: 70%;
+    padding: 5px 15px 5px 15px;
+    color: antiquewhite;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: dimgrey;
+    border-radius: 3px;
+    box-shadow: #282c34 3px 3px 5px;
 }
 
 .msg-author {
-  font-size: calc(5px + 2vmin);
-  color: darkseagreen;
-  font-weight: bold;
+    font-size: calc(5px + 2vmin);
+    color: darkseagreen;
+    font-weight: bold;
 }
 
 .msg-author ~ div {
-  font-size: calc(10px + 2vmin);
+    font-size: calc(10px + 2vmin);
 }
 
 .left {
-  align-self: start;
+    align-self: start;
 }
 
 .right {
-  align-self: end;
+    align-self: end;
 }

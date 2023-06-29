@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ChatsBar from "../componentsTest/ChatsBar";
+import ChatsList from "../componentsTest/ChatsList";
 import Chat from "../componentsTest/Chat";
 import axios from "axios";
 import Cookies from 'universal-cookie'
-import ButtonBar from "../componentsTest/ButtonBar";
+import ButtonsBar from "../componentsTest/ButtonsBar";
 import FriendsBar from "../componentsTest/FriendsBar";
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {Container, Form, Button, FloatingLabel, Col, Row, InputGroup, Nav} from "react-bootstrap";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
-
+import {Container, Col, Row} from "react-bootstrap";
 
 const init_chats = [
     {user: "Domenico"},
@@ -37,9 +34,8 @@ export default function ChatPage() {
         //     navigate("/login");
         // } else {
         //     setLoggedUser(cookies.get("username"))
-        setLoggedUser("fratm")
 
-        const init = async () => {
+        let init = async () => {
             let res = await axios.post(`http://localhost:3001/api/users/getFriends/${loggedUser}`)
             let friends = res.data
             setFriends(friends)
@@ -55,23 +51,38 @@ export default function ChatPage() {
 
     return (
         <>
-            <div className="App">
-                <ButtonBar setSelectedTab={setSelectedTab}/>
+            {/* TODO - Fissato il massimo scorrimento verticale, permettere lo scorrimento della sola chat*/}
+            <div className="vh-100">
+                <Container className="App" fluid>
+                    <Row>
+                        <Col md={1}>
+                            <ButtonsBar setSelectedTab={setSelectedTab}/>
+                        </Col>
 
-                { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
-                {selectedTab === "F" && <FriendsBar friends={friends} setFriends={setFriends} loggedUser={loggedUser}/>}
-                {selectedTab === "C" && <ChatsBar chats_list={init_chats} loggedUser={loggedUser}/>}
-                {selectedTab === "N" && <div>IN DEVELOPMENT</div>}
+                        <Col md={3}>
+                            {/*TODO - Div per la lista delle chat o degli amici*/}
+                            { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
+                            {selectedTab === "F" &&
+                                <FriendsBar friends={friends} setFriends={setFriends} loggedUser={loggedUser}/>}
+                            {selectedTab === "C" && <ChatsList chats_list={init_chats} loggedUser={loggedUser}/>}
+                            {selectedTab === "N" && <div>Coming soon...</div>}
+                            {selectedTab === "L" && <div>Uscita dal profilo...</div>}
+                        </Col>
 
-                <Chat
-                    messages={messages}
-                    setMessages={setMessages}
-                    loggedUser={loggedUser}
-                    receiver={receiver}
-                />
+                        <Col md={6} style={{flex: '1 1 auto'}}>
+                            {/* TODO - Fare in modo che l'input text rimanga fisso in basso al div, senza scorrere */}
+                            <Chat
+                                messages={messages}
+                                setMessages={setMessages}
+                                loggedUser={loggedUser}
+                                receiver={receiver}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         </>
     )
 }
 
-// TODO gestire la situazione senza amici
+// TODO - Gestire la situazione senza amici (sadge)

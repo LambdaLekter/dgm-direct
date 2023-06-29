@@ -24,4 +24,4 @@ app.use('/api', apiRouter)
 
 console.log("CORS abilitato su tutti i percorsi")
 
-// TODO Rinominare le cartelle src e server in frontend e backend
+// TODO: Rinominare le cartelle src e server in frontend e backend

@@ -19,7 +19,7 @@ export default function LoginForm(props) { // eslint-disable-next-line
 
     useEffect(() => {
         // Verifica se il cookie è impostato
-        if(cookies.get("username")) {
+        if (cookies.get("username")) {
             console.log(cookies.get("username"))
             navigate("/chat");
         }
@@ -45,7 +45,7 @@ export default function LoginForm(props) { // eslint-disable-next-line
                 console.log("Login effettuato")
                 console.log(res.data)
 
-                cookies.set("username", username, { path: "/", maxAge: 14400})
+                cookies.set("username", username, {path: "/", maxAge: 14400})
                 navigate("/chat");
             })
             .catch(error => {
@@ -59,7 +59,8 @@ export default function LoginForm(props) { // eslint-disable-next-line
                 <Container>
                     <Row className="justify-content-center">
                         <Col>
-                            <Form className="bg-white p-4 rounded-4" noValidate validated={validated} onSubmit={handleSubmit}>
+                            <Form className="bg-white p-4 rounded-4" noValidate validated={validated}
+                                  onSubmit={handleSubmit}>
                                 <h2 align="center">Login</h2>
                                 <Col>
                                     <Row className="mb-2">

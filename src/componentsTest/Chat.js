@@ -2,6 +2,9 @@ import MessageItem from "./MessageItem";
 import MessageBar from "./MessageBar";
 import axios from "axios";
 
+import 'bootstrap/dist/css/bootstrap.css';
+import {Container, Col, Row} from "react-bootstrap";
+
 export default function Chat({messages, setMessages, loggedUser, receiver}) {
     let sendMessage = (event) => {
         event.preventDefault()
@@ -15,26 +18,41 @@ export default function Chat({messages, setMessages, loggedUser, receiver}) {
             time: Date.now()
         };
 
-        axios.post('http://localhost:3001/api/messages/addMessage', message)
-            .then(res => {
-                console.log("Messaggio creato con successo")
-                console.log(res.data)
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        if (msgText !== "") {
+            // * Controllo per inviare un messaggio solo qualora il campo di testo contenga qualcosa
 
-        msgInput.value = ""
-        setMessages([...messages, {text: msgText, author: loggedUser}])
+            axios.post('http://localhost:3001/api/messages/addMessage', message)
+                .then(res => {
+                    console.log("Messaggio creato con successo")
+                    console.log(res.data)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            msgInput.value = ""
+            setMessages([...messages, {text: msgText, author: loggedUser}])
+        }
     }
 
-    return <div id="chat">
-        <div id="messages">
-            { messages.map( (message, idx) => {
-                let side = message.author === loggedUser ? "right" : "left"
-                return <MessageItem key={"msg"+idx} message={message} side={side} />
-            } ) }
-        </div>
-        <MessageBar submitHandler={sendMessage} />
-    </div>
+    return (
+        <Container fluid id="chat">
+            <Row style={{ height: '100%' }}>
+                <Col>
+                    {/* TODO (per Para) - La prego di ridurre la grandezza del testo dei messaggi, non sono
+                        ancora ipovedente */}
+                    <div id="messages">
+                        {messages.map((message, idx) => {
+                            let side = message.author === loggedUser ? "right" : "left"
+                            return <MessageItem key={"msg" + idx} message={message} side={side}/>
+                        })}
+                    </div>
+
+                    <div id="message-bar">
+                        <MessageBar submitHandler={sendMessage}/>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    )
 }
