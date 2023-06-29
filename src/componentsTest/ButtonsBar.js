@@ -3,9 +3,11 @@ import {useNavigate} from "react-router-dom";
 import {Button, Nav} from 'react-bootstrap'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments, faUserGroup, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'universal-cookie'
 
 export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
     const navigate = useNavigate()
+    const cookie = new Cookies()
 
     const getHandler = (tab) => {
         return () => {
@@ -15,6 +17,9 @@ export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
 
     const logout = () => {
         setLoggedUser("")
+        cookie.remove("username")
+
+        // TODO: Reindirizzamento ad una pagina Home
         navigate("/login")
     }
 

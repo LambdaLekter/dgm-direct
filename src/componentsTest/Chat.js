@@ -36,8 +36,8 @@ export default function Chat({messages, setMessages, loggedUser, receiver}) {
     }
 
     return (
-        <Container fluid id="chat">
-            <Row style={{ height: '100%' }}>
+        <Container fluid >
+            <Row>
                 <Col>
                     {/* TODO (per Para) - La prego di ridurre la grandezza del testo dei messaggi, non sono
                         ancora ipovedente */}

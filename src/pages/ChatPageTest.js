@@ -55,22 +55,21 @@ export default function ChatPage() {
             <div className="vh-100">
                 <Container className="App" fluid>
                     <Row>
-                        <Col md={1}>
+                        <Col md={1} id="button-bar-div">
                             <ButtonsBar setSelectedTab={setSelectedTab}/>
                         </Col>
 
-                        <Col md={3}>
-                            {/*TODO - Div per la lista delle chat o degli amici*/}
+                        <Col md={3} id="side-list">
+                            {/*TODO: Div per la lista delle chat o degli amici*/}
                             { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
+
                             {selectedTab === "F" &&
                                 <FriendsBar friends={friends} setFriends={setFriends} loggedUser={loggedUser}/>}
                             {selectedTab === "C" && <ChatsList chats_list={init_chats} loggedUser={loggedUser}/>}
                             {selectedTab === "N" && <div>Coming soon...</div>}
-                            {selectedTab === "L" && <div>Uscita dal profilo...</div>}
                         </Col>
 
-                        <Col md={6} style={{flex: '1 1 auto'}}>
-                            {/* TODO - Fare in modo che l'input text rimanga fisso in basso al div, senza scorrere */}
+                        <Col md={6} id="chat">
                             <Chat
                                 messages={messages}
                                 setMessages={setMessages}

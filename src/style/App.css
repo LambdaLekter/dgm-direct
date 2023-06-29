@@ -29,30 +29,12 @@
     justify-content: left;
 }
 
-/* * Necessario per mantenere l'input text fisso*/
+/* * Necessario per mantenere l'input text fisso */
 #message-bar {
     position: sticky;
     bottom: 0;
     padding: 10px;
 }
-
-/*#message-bar button {*/
-/*    margin-left: 10px;*/
-/*    border-radius: 5px;*/
-/*}*/
-
-/* TODO (per Para): Aggiungere un contenitore per la sidebar di colore grigio chiaro */
-/*#button-bar {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    background-color: #383c44;
-}*/
-
-/*#button-bar button {
-    margin-bottom: 10px;
-}*/
 
 .message-item {
     max-width: 70%;

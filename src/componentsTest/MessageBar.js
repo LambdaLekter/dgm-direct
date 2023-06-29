@@ -15,7 +15,7 @@ export default function MessageBar({submitHandler}) {
     return (
         <Form onSubmit={submitHandler}>
             <InputGroup>
-                <Form.Control type="text" id="message-bar-input" placeholder="Scrivi un messaggio"/>
+                <Form.Control type="text" id="message-bar-input" placeholder="Scrivi un messaggio" autoComplete="off"/>
                 <Button size="lg" type="submit">
                     <FontAwesomeIcon icon={faPaperPlane}/>
                 </Button>
