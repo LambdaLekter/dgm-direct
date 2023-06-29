@@ -21,6 +21,16 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
             });
     }
 
+    const getFriendsItems = () => {
+        if(friends && friends.length > 0){
+             return friends.map((friend, idx) =>
+                <ChatItem key={"friend" + idx} chatUser={friend}/>
+             )
+        } else {
+            return <div>Inserisci il tuo primo amico!</div>
+        }
+    }
+
     return (
         <div id="friends-bar">
             <h3> Amici di {loggedUser} </h3>
@@ -28,9 +38,7 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
                 <input type="text"/>
                 <input type="submit" value="+"/>
             </form>
-            {friends.map((friend, idx) =>
-                <ChatItem key={"friend" + idx} chatUser={friend}/>
-            )}
+            { getFriendsItems() }
         </div>
     )
 }

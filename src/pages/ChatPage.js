@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ChatsList from "../components/ChatsList";
 import Chat from "../components/Chat";
 import axios from "axios";
 import Cookies from 'universal-cookie'
@@ -9,14 +8,6 @@ import Sidebar from "../components/Sidebar";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
-
-const init_chats = [
-    {user: {username: "Domenico"}},
-    {user: {username: "Michele"}},
-    {user: {username: "Giuseppe"}},
-    {user: {username: "Francescomaria"}},
-    {user: {username: "Filippo"}}
-]
 
 export default function ChatPage() {
     const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il default
@@ -54,6 +45,8 @@ export default function ChatPage() {
 
         init().then(() => console.log("Inizializzazione effettuata"))
     }, [])
+
+    const friendsStates = [friends, setFriends, setFriendless]
 
     return (
         <>
