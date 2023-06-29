@@ -29,6 +29,12 @@ html {
     background-color: #343840;
     box-shadow: #202227 1px 0 7px;
     height: 100vh;
+    overflow: scroll;
+
+}
+
+#side-list::-webkit-scrollbar {
+    display: none;
 }
 
 #side-list h3 {
@@ -45,6 +51,7 @@ html {
 }
 
 #chat {
+    position: relative;
     background-color: #42464e;
     flex: 1 1 auto;
     height: 100vh;
@@ -61,8 +68,11 @@ html {
 }
 
 #friendless-message {
-    margin: 10px;
-    font-size: 20px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #messages {
@@ -75,7 +85,7 @@ html {
 #message-bar {
     position: sticky;
     bottom: 0;
-    padding: 10px;
+    padding: 20px;
 }
 
 /*
@@ -232,10 +242,8 @@ html {
 /* Navbar nel quale si mostra l'utente loggato */
 .navbar {
     display: flex;
-    align-items: center;
     background-color: red;
     height: 70px;
-    justify-content: space-between;
 }
 
 .user {

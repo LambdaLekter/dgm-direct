@@ -1,3 +1,4 @@
+import React, {useEffect, useRef} from "react";
 import MessageItem from "./MessageItem";
 import MessageBar from "./MessageBar";
 import axios from "axios";
@@ -6,6 +7,25 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
 export default function Chat({messages, setMessages, loggedUser, receiver, friendless}) {
+    const chatRef = useRef(null);
+    let firstScroll = false
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages])
+
+    const scrollToBottom = () => {
+        if (chatRef.current) {
+            if(!firstScroll) {
+                chatRef.current.scrollIntoView({ block: 'end' });
+                firstScroll = true
+            } else {
+                chatRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                firstScroll = true
+            }
+        }
+    };
+
     const sendMessage = (event) => {
         event.preventDefault()
         const msgInput = document.getElementById("message-bar-input")
@@ -30,6 +50,7 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
                     console.error(error);
                 });
 
+            scrollToBottom()
             msgInput.value = ""
             setMessages([...messages, {text: msgText, author: loggedUser}])
         }
@@ -39,20 +60,22 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
         <Container fluid>
             <Row>
                 <Col>
-                    { friendless ?
-                        ( <div id="friendless-message">Aggiungi un amico per cominciare a chattare!</div> )
-                        : ( <div id="messages">
-                                { messages.map((message, idx) => {
-                                    let side = message.author === loggedUser ? "right" : "left"
-                                    return <MessageItem key={"msg" + idx} message={message} side={side} />
-                                } ) }
-                            </div>
-                        )
+                    {friendless ?
+                        (<div id="friendless-message">
+                            Aggiungi un amico per cominciare a chattare!
+                        </div>) :
+                        (<div id="messages" ref={chatRef}>
+                            {messages.map((message, idx) => {
+                                let side = message.author === loggedUser ? "right" : "left"
+                                return <MessageItem key={"msg" + idx} message={message} side={side}/>
+                            })}
+                        </div>)
                     }
-
-                    <div id="message-bar">
-                        <MessageBar submitHandler={sendMessage}/>
-                    </div>
+                    {friendless ? null :
+                        (<div id="message-bar">
+                            <MessageBar submitHandler={sendMessage}/>
+                        </div>)
+                    }
                 </Col>
             </Row>
         </Container>

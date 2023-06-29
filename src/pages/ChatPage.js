@@ -54,7 +54,7 @@ export default function ChatPage() {
             <div>
                 <Container className="App" fluid>
                     <Row>
-                        <Col md={1} id="button-bar-div" >
+                        <Col md={1} id="button-bar-div">
                             <ButtonsBar setSelectedTab={setSelectedTab}/>
                         </Col>
 
@@ -84,5 +84,3 @@ export default function ChatPage() {
         </>
     )
 }
-
-// TODO - Gestire la situazione senza amici (sadge)
