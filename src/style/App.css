@@ -1,3 +1,7 @@
+html {
+    background-color: #42464e;
+}
+
 .App {
     min-height: 100vh;
     color: white;
@@ -18,7 +22,7 @@
     z-index: 1;
     background-color: #343840;
     box-shadow: #202227 1px 0 7px;
-    padding: 30px;
+    padding: 20px 30px 0 30px;
 }
 
 #side-list h3 {
@@ -73,19 +77,22 @@
 }
 
 .msg-author {
-    font-size: calc(3px + 2vmin);
+    font-size: 15px;
     color: white;
     font-weight: bold;
     font-family: "Helvetica Neue", sans-serif;
 }
 
-.msg-author ~ div {
-    font-size: calc(10px + 2vmin);
-    font-family: "Helvetica Neue", sans-serif;
+.msg-text {
+    font-size: 20px
 }
 
-.msg-text {
-    font-size: 2px
+/* Orario scritto in basso ad ogni messaggio */
+.msg-clock {
+    color: #EFEFF3;
+    font-family: "Helvetica Neue", sans-serif;
+    text-align: right;
+    font-size: 13px;
 }
 
 .left {
@@ -94,14 +101,6 @@
 
 .right {
     align-self: end;
-}
-
-/* Orario scritto in basso ad ogni messaggio */
-.msg-clock {
-    color: #EFEFF3;
-    font-family: "Helvetica Neue", sans-serif;
-    text-align: right;
-    font-size: 5px;
 }
 
 /* Realizzazione della Navbar che mostra il nome dell'utente loggato */
