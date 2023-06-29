@@ -40,17 +40,16 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
         <Container fluid>
             <Row>
                 <Col>
-                    {/* TODO (per Para): ridurre la dimensione dei messaggi */}
-                    {/*{ friendless ?*/}
-                    {/*    ( <div id="messages">*/}
-                    {/*        {messages.map((message, idx) => {*/}
-                    {/*            let side = message.author === loggedUser ? "right" : "left"*/}
-                    {/*            return <MessageItem key={"msg" + idx} message={message} side={side}/>*/}
-                    {/*        })}*/}
-                    {/*    </div> )*/}
-                    {/*    : ( <p>Aggiungi un amico per cominciare a chattare!</p> )*/}
-                    {/*}*/}
-
+                    { friendless ?
+                        ( <div id="friendless-message">Aggiungi un amico per cominciare a chattare!</div> )
+                        : ( <div id="messages">
+                                { messages.map((message, idx) => {
+                                    let side = message.author === loggedUser ? "right" : "left"
+                                    return <MessageItem key={"msg" + idx} message={message} side={side} />
+                                } ) }
+                            </div>
+                        )
+                    }
 
                     <div id="message-bar">
                         <MessageBar submitHandler={sendMessage}/>

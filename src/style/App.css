@@ -1,6 +1,5 @@
 .App {
     min-height: 100vh;
-    font-size: calc(10px + 2vmin);
     color: white;
 }
 
@@ -27,6 +26,13 @@
     margin-bottom: 20px;
 }
 
+#friends-bar input[type="text"] {
+    width: 90%
+}
+#friends-bar input[type="submit"] {
+    width: 10%
+}
+
 #chat {
     background-color: #42464e;
     flex: 1 1 auto;
@@ -34,13 +40,18 @@
 
 .chat-item {
     margin-left: 10px;
+    margin-top: 10px;
+}
+
+#friendless-message {
+    margin: 10px;
+    font-size: 20px;
 }
 
 #messages {
     display: flex;
     flex-direction: column;
     justify-content: left;
-
 }
 
 /* * Necessario per mantenere l'input text fisso */
@@ -62,7 +73,7 @@
 }
 
 .msg-author {
-    font-size: calc(5px + 2vmin);
+    font-size: calc(3px + 2vmin);
     color: white;
     font-weight: bold;
     font-family: "Helvetica Neue", sans-serif;
@@ -71,6 +82,10 @@
 .msg-author ~ div {
     font-size: calc(10px + 2vmin);
     font-family: "Helvetica Neue", sans-serif;
+}
+
+.msg-text {
+    font-size: 2px
 }
 
 .left {
@@ -82,10 +97,11 @@
 }
 
 /* Orario scritto in basso ad ogni messaggio */
-.clock {
+.msg-clock {
     color: #EFEFF3;
     font-family: "Helvetica Neue", sans-serif;
     text-align: right;
+    font-size: 5px;
 }
 
 /* Realizzazione della Navbar che mostra il nome dell'utente loggato */

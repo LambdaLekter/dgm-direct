@@ -1,7 +1,7 @@
 import ChatItem from "./ChatsListItem";
 import axios from "axios";
 
-export default function FriendsBar({friends, setFriends, loggedUser}) {
+export default function FriendsBar({friends, setFriends, loggedUser, setFriendless}) {
     const onAddFriend = (event) => {
         event.preventDefault()
         let friend_input = event.target.firstElementChild
@@ -13,11 +13,12 @@ export default function FriendsBar({friends, setFriends, loggedUser}) {
             .then(res => {
                 console.log(`Amico aggiunto: ${res.data}`)
                 setFriends([...friends, res.data])
+                friend_input.value = ""
+                setFriendless(false)
             })
             .catch(error => {
                 console.error(error);
             });
-        friend_input.value = ""
     }
 
     return (

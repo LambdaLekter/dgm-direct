@@ -19,8 +19,8 @@ const init_chats = [
 ]
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("")
-    const [receiver, setReceiver] = useState("sorm")
+    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il default
+    const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [messages, setMessages] = useState([])
     const [friendless, setFriendless] = useState(false)
@@ -29,6 +29,26 @@ export default function ChatPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        let init = async () => {
+            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${loggedUser}`)
+            let friendsData = res.data
+            setFriends(friendsData)
+
+            /*
+            res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
+            setMessages(res.data)
+            */
+
+            if (friendsData.length > 0) {
+                const receiverUsername = friendsData[0].username
+                setReceiver(receiverUsername)
+                res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiverUsername}`)
+                setMessages(res.data)
+            } else {
+                setFriendless(true)
+            }
+        }
+
         // Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
         // if(!cookies.get("username")) {
         //     console.log("Login non effettuato. Reindirizzamento...")
@@ -36,25 +56,6 @@ export default function ChatPage() {
         // } else {
         //     setLoggedUser(cookies.get("username"))
         // }
-        setLoggedUser("fratm") // TODO: da rimuovere, serve per debug
-
-        let init = async () => {
-            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${loggedUser}`)
-            let friends = res.data
-            setFriends(friends)
-
-
-            res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
-            setMessages(res.data)
-
-            // if (friends.length > 0) {
-            //     setReceiver(friends[0].username)
-            //     res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiver}`)
-            //     setMessages(res.data)
-            // } else {
-            //     setFriendless(true)
-            // }
-        }
 
         init().then(() => console.log("Inizializzazione effettuata"))
     }, [])
@@ -70,11 +71,15 @@ export default function ChatPage() {
                         </Col>
 
                         <Col md={3} id="side-list">
-                            {/*TODO: Div per la lista delle chat o degli amici*/}
+                            { /*TODO: Div per la lista delle chat o degli amici*/ }
                             { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
 
                             {selectedTab === "F" &&
-                                <FriendsBar friends={friends} setFriends={setFriends} loggedUser={loggedUser}/>}
+                                <FriendsBar
+                                    friends={friends}
+                                    setFriends={setFriends}
+                                    loggedUser={loggedUser}
+                                    setFriendless={setFriendless} /> }
                             {selectedTab === "C" && <ChatsList chats_list={init_chats} loggedUser={loggedUser}/>}
                             {selectedTab === "N" && <div>Coming soon...</div>}
                         </Col>

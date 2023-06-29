@@ -17,8 +17,8 @@ export default function MessageItem({message, side}) {
     return (
         <div className={"message-item " + side}>
             <div className="msg-author">{message.author}</div>
-            <div>{message.text}</div>
-            <div className="clock">{showTime()}</div>
+            <div className="msg-text">{message.text}</div>
+            <div className="msg-clock">{showTime()}</div>
         </div>
     )
 }
