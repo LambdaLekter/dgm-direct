@@ -47,6 +47,9 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
                 .catch(error => {
                     console.error(error);
                 });
+            setMessages([...messages, message])
+            msgInput.value = ""
+            scrollToBottom()
         }
     }
 
