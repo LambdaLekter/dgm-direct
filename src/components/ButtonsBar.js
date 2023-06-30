@@ -1,9 +1,11 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Nav} from 'react-bootstrap'
+import Cookies from 'universal-cookie'
+
+import '../style/ButtonsBar.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments, faUserGroup, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
-import Cookies from 'universal-cookie'
 
 export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
     const navigate = useNavigate()
@@ -24,22 +26,23 @@ export default function ButtonsBar({setSelectedTab, setLoggedUser}) {
     }
 
     return (
-        <Nav id="button-bar" className="flex-column">
-            <Button title="Chat" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("C")}>
+        <Nav className="flex-column">
+            <Button title="Le tue chat" variant="primary" size="md" className="rounded-circle mb-3 navbar-button"
+                    onClick={getHandler("C")}>
                 <FontAwesomeIcon icon={faComments}/>
             </Button>
-            <Button title="Amici" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("F")}>
+            <Button title="Amici" variant="primary" size="md" className="rounded-circle mb-3 navbar-button"
+                    onClick={getHandler("F")}>
                 <FontAwesomeIcon icon={faUserGroup}/>
             </Button>
-            <Button title="Notifiche" variant="primary" size="md" className="rounded-circle mb-3" onClick={getHandler("N")}>
+            <Button title="Notifiche" variant="primary" size="md" className="rounded-circle mb-5 navbar-button"
+                    onClick={getHandler("N")}>
                 <FontAwesomeIcon icon={faBell} shake/>
             </Button>
-            <Button title="Logout" variant="primary" size="md" className="rounded-circle mb-3" onClick={logout}>
+            <Button title="Logout" variant="danger" size="md" className="rounded-circle navbar-button logout-button"
+                    onClick={logout}>
                 <FontAwesomeIcon icon={faArrowRightFromBracket}/>
             </Button>
-
-            {/* TODO: Cambiare lo stato di attivo per i bottoni della sidebar */}
-            {/* TODO: Fissare i pulsanti della sidebar allo scorrimento */}
         </Nav>
     )
 }

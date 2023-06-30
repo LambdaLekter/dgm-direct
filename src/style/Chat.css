@@ -1,0 +1,21 @@
+/* Chat.js che conterrà la chat */
+#friendless-message {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+/* * Necessario per mantenere l'input text fisso */
+#message-bar {
+    position: sticky;
+    bottom: 0;
+    padding: 20px;
+}

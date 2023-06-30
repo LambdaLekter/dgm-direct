@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("sorm") // TODO rimuovere il default
+    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il default
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [messages, setMessages] = useState([])
@@ -50,7 +50,6 @@ export default function ChatPage() {
 
     return (
         <>
-            {/* TODO - Fissato il massimo scorrimento verticale, permettere lo scorrimento della sola chat*/}
             <div>
                 <Container className="App" fluid>
                     <Row>
@@ -59,7 +58,6 @@ export default function ChatPage() {
                         </Col>
 
                         <Col md={3} id="side-list">
-                            { /* TODO: Div per la lista delle chat o degli amici */}
                             <Sidebar
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}

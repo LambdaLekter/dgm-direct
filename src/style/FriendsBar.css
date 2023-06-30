@@ -1,0 +1,8 @@
+/* Visualizzazione amici dell'utente loggato */
+#friends-bar input[type="text"] {
+    width: 90%
+}
+
+#friends-bar input[type="submit"] {
+    width: 10%
+}

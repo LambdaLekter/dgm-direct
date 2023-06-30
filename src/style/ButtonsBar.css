@@ -1,0 +1,22 @@
+/* * Stile per i pulsanti nella barra laterale */
+.navbar-button, .logout-button {
+    width: 45px;
+    height: 45px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-button:hover, .navbar-button:focus {
+    background-color: white;
+    color: black;
+}
+
+.navbar-button.selected {
+    background-color: white;
+    color: black;
+}
+
+.logout-button:hover, .logout-button:focus {
+    background-color: white;
+    color: red;
+}

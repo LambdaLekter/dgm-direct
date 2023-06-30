@@ -1,3 +1,5 @@
+import '../style/ChatList.css'
+
 export default function ChatsListItem({chatUser}) {
     return (
         <>
@@ -10,10 +12,6 @@ export default function ChatsListItem({chatUser}) {
                     : <span>[Dati non trovati]</span> }
                 </div>
             </div>
-
-            {/*<div className="chat-item">*/}
-            {/*    {user.username}*/}
-            {/*</div>*/}
         </>
     )
 }

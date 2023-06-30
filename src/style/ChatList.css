@@ -1,0 +1,30 @@
+/* Elenco chat attive sulla sinistra */
+.userChat {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.userChat:hover {
+    background-color: #7e7e83;
+}
+
+.userChat > img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userChatInfo > span {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.userChatInfo > p {
+    font-size: 14px;
+    color: lightgray;
+}

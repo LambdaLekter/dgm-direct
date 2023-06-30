@@ -11,12 +11,8 @@ html {
     display: none;
 }
 
-#button-bar-div {
-    z-index: 2;
-    background-color: #2a2a32;
-    width: 100px;
-}
 
+/* * Barra laterale dei pulsanti */
 #button-bar-div {
     z-index: 2;
     background-color: #2a2a32;
@@ -24,20 +20,14 @@ html {
     padding-top: 10px;
 }
 
-#button-bar-div button {
-    width: 45px;
-    height: 45px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
+/* * Sidebar che conterrà l'elenco delle chat attive */
 #side-list {
     z-index: 1;
     background-color: #343840;
     box-shadow: #202227 1px 0 7px;
     height: 100vh;
     overflow-y: scroll;
-
 }
 
 #side-list::-webkit-scrollbar {
@@ -47,14 +37,6 @@ html {
 #side-list h3 {
     font-family: Arial, serif;
     margin-bottom: 20px;
-}
-
-#friends-bar input[type="text"] {
-    width: 90%
-}
-
-#friends-bar input[type="submit"] {
-    width: 10%
 }
 
 #chat {
@@ -74,69 +56,12 @@ html {
     margin-top: 10px;
 }
 
-#friendless-message {
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#messages {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-}
-
-/* * Necessario per mantenere l'input text fisso */
-#message-bar {
-    position: sticky;
-    bottom: 0;
-    padding: 20px;
-}
-
-/*
-.message-item {
-    max-width: 70%;
-    padding: 5px 15px 5px 15px;
-    color: antiquewhite;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: dimgrey;
-    border-radius: 3px;
-    box-shadow: #282c34 2px 2px 7px;
-}
-
-.msg-author {
-    font-size: 15px;
-    color: white;
-    font-weight: bold;
-    font-family: "Helvetica Neue", sans-serif;
-}
-
-.msg-text {
-    font-size: 20px
-}
-.msg-clock {
-    color: #EFEFF3;
-    font-family: "Helvetica Neue", sans-serif;
-    text-align: right;
-    font-size: 13px;
-}
-*/
-/* Orario scritto in basso ad ogni messaggio */
-
-/*nuovo css msg*/
-
-
 .message-item-left {
     position: relative;
     margin-left: 20px;
     margin-bottom: 10px;
     padding: 10px;
     background-color: lightslategrey;
-    /*width: 200px;
-    height: 50px;*/
     text-align: left;
     border: 1px solid #97C6E3;
     border-radius: 10px;
@@ -152,8 +77,6 @@ html {
     margin-left: calc(100% - 240px);
     padding: 10px;
     background-color: lightslategrey;
-    /*width: 200px;
-    height: 50px;*/
     text-align: left;
     border: 1px solid #97C6E3;
     border-radius: 10px;
@@ -207,8 +130,6 @@ html {
 .message-item-right:after {
     content: '';
     position: absolute;
-    /* width: 0;
-     height: 0;*/
     border-bottom: 15px solid lightslategrey;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
@@ -219,8 +140,6 @@ html {
 .message-item-right:before {
     content: '';
     position: absolute;
-    width: 0;
-    height: 0;
     border-bottom: 17px solid #97C6E3;
     border-left: 16px solid transparent;
     border-right: 16px solid transparent;
@@ -242,54 +161,3 @@ html {
 .right {
     align-self: end;
 }
-
-/* ---------------------------- */
-
-
-/* Navbar nel quale si mostra l'utente loggato */
-.navbar {
-    display: flex;
-    background-color: red;
-    height: 70px;
-}
-
-.user {
-    padding-left: 10px;
-    font-weight: bold;
-}
-
-/* ---------------------------- */
-
-
-/* Elenco chat nella sidebar */
-.userChat {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
-    cursor: pointer;
-}
-
-.userChat:hover {
-    background-color: #7e7e83;
-}
-
-.userChat > img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.userChatInfo > span {
-    font-size: 17px;
-    font-weight: 500;
-}
-
-.userChatInfo > p {
-    font-size: 14px;
-    color: lightgray;
-}
-
-/* ---------------------------- */

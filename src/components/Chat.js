@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from "react";
 import MessageItem from "./MessageItem";
 import MessageBar from "./MessageBar";
 import axios from "axios";
+import '../style/Chat.css'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
@@ -40,9 +41,6 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
             axios.post('http://localhost:3001/api/messages/addMessage', message)
                 .then(res => {
                     console.log("Messaggio creato con successo")
-                    setMessages([...messages, res.data])
-                    msgInput.value = ""
-                    scrollToBottom()
                 })
                 .catch(error => {
                     console.error(error);

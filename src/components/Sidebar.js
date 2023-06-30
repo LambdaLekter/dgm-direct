@@ -13,7 +13,7 @@ const init_chats = [
 
 export default function Sidebar({loggedUser, selectedTab, friendsStates}) {
     return (
-        <div className="sidebar">
+        <div>
             <Navbar loggedUser={loggedUser}/>
             { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
             {selectedTab === "F" &&

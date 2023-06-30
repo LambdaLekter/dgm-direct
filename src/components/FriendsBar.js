@@ -1,5 +1,6 @@
 import ChatListItem from "./ChatsListItem";
 import axios from "axios";
+import '../style/FriendsBar.css'
 
 export default function FriendsBar({friends, setFriends, loggedUser, setFriendless}) {
     const onAddFriend = (event) => {

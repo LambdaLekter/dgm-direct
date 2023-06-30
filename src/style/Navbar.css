@@ -1,0 +1,11 @@
+/* Navbar nel quale si mostra l'utente loggato */
+.navbar {
+    display: flex;
+    background-color: red;
+    height: 70px;
+}
+
+.user {
+    padding-left: 10px;
+    font-weight: bold;
+}
