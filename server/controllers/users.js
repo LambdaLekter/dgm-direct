@@ -1,6 +1,7 @@
 const User = require('../models/users')
 const Message = require("../models/messages")
 const bcrypt = require('bcryptjs');
+const {uniqueUsers} = require("../../src/utils");
 
 module.exports = {
     addUser: async (req, res) => {
@@ -70,11 +71,11 @@ module.exports = {
                     Message.find({$or: [{author: loggedUser._id}, {receiver: loggedUser._id}]})
                         .then( messages => {
                             let usersPromises = messages.map( message =>
-                                message.author.equals(loggedUser._id) ? User.findOne({_id: message.author})
-                                    : User.findOne({_id: message.receiver})
+                                message.author.equals(loggedUser._id) ? User.findOne({_id: message.receiver})
+                                    : User.findOne({_id: message.author})
                             )
                             Promise.all(usersPromises).then(users => {
-                                res.status(200).json(users)
+                                res.status(200).json(uniqueUsers(users))
                             })
                         } )
                 })

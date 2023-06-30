@@ -11,5 +11,12 @@ module.exports = {
         }
         d = h + ":" + m;
         return d
+    },
+
+    uniqueUsers: (list) => {
+        const id_set = [...new Set(list.map(user => user._id))]
+        return id_set.map( id =>
+            list.filter(user => user._id === id)[0]
+        )
     }
 }

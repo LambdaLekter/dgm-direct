@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
 html {
     background-color: #42464e;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .App {
@@ -14,29 +17,41 @@ html {
 
 /* * Barra laterale dei pulsanti */
 #button-bar-div {
-    z-index: 2;
+    z-index: 1;
     background-color: #2a2a32;
     width: 80px;
     padding-top: 10px;
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #40454d;
 }
 
 
 /* * Sidebar che conterrà l'elenco delle chat attive */
-#side-list {
-    z-index: 1;
+#side-tab {
     background-color: #343840;
-    box-shadow: #202227 1px 0 7px;
+    /* box-shadow: #202227 1px 0 7px; */
     height: 100vh;
-    overflow-y: scroll;
+    padding: 0;
 }
 
-#side-list::-webkit-scrollbar {
+#side-tab::-webkit-scrollbar, #side-list::-webkit-scrollbar {
     display: none;
 }
 
+#side-list {
+    overflow-y: auto;
+    height: 92vh;
+}
+
 #side-list h3 {
-    font-family: Arial, serif;
     margin-bottom: 20px;
+}
+
+.side-list-chats {
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #2a2a32;
 }
 
 #chat {
@@ -44,11 +59,23 @@ html {
     background-color: #42464e;
     flex: 1 1 auto;
     height: 100vh;
-    overflow-y: auto;
+    padding: 0;
 }
 
-#chat::-webkit-scrollbar {
+#chat-wrapper {
+    overflow-y: auto;
+    height: 92vh;
+    background-color: #42464e;
+}
+
+#chat-wrapper::-webkit-scrollbar {
     display: none;
+}
+
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: none;
+    }
 }
 
 .chat-item {
@@ -61,28 +88,28 @@ html {
     margin-left: 25px;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: lightslategrey;
+    background-color: #2a7768;
     text-align: left;
-    border: 1px solid #97C6E3;
+    border: 1px solid #bee1e6;
     border-radius: 10px;
     box-shadow: #282c34 2px 2px 7px;
-    max-width: 40%;
+    max-width: 45%;
     max-height: 100%;
 }
 
 .message-item-right {
+    color: black;
     display: inline-block;
     position: relative;
     margin-bottom: 10px;
-    margin-left: 60%;
+    margin-left: 55%;
     margin-right: 25px;
     padding: 10px;
-    background-color: lightslategrey;
+    background-color: #bee1e6;
     text-align: left;
-    border: 1px solid #97C6E3;
+    border: 2px solid #2a7768;
     border-radius: 10px;
     box-shadow: #282c34 2px 2px 7px;
-    max-width: 40%;
     max-height: 100%;
     box-sizing: border-box;
 }
@@ -90,8 +117,17 @@ html {
 .message-content {
     padding: 0;
     margin: 0;
-    font-family: Helvetica, serif;
-    color: antiquewhite;
+    white-space: pre-line;
+    word-wrap: break-word;
+}
+
+.message-timestamp-left {
+    position: absolute;
+    font-size: .85em;
+    font-weight: 300;
+    bottom: 5px;
+    right: 5px;
+    color: #bee1e6;
 }
 
 .message-timestamp-right {
@@ -100,7 +136,7 @@ html {
     font-weight: 300;
     bottom: 5px;
     right: 5px;
-    color: lightgrey;
+    color: #2a7768;
 }
 
 .message-item-left:after {
@@ -108,7 +144,7 @@ html {
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 15px solid lightslategrey;
+    border-top: 15px solid #bee1e6;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     top: 0;
@@ -120,7 +156,7 @@ html {
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 17px solid #97C6E3;
+    border-top: 17px solid #bee1e6;
     border-left: 16px solid transparent;
     border-right: 16px solid transparent;
     top: -1px;
@@ -131,7 +167,7 @@ html {
 .message-item-right:after {
     content: '';
     position: absolute;
-    border-bottom: 15px solid lightslategrey;
+    border-bottom: 15px solid #2a7768;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     bottom: 0;
@@ -141,18 +177,23 @@ html {
 .message-item-right:before {
     content: '';
     position: absolute;
-    border-bottom: 17px solid #97C6E3;
+    border-bottom: 17px solid #2a7768;
     border-left: 16px solid transparent;
     border-right: 16px solid transparent;
     bottom: -1px;
     right: -17px;
 }
 
-.msg-author {
-    font-size: calc(3px + 2vmin);
-    color: darkseagreen;
+.msg-author-right {
+    font-size: 18px;
+    color: #2a7768;
     font-weight: bold;
-    font-family: Helvetica, serif;
+}
+
+.msg-author-left {
+    font-size: 18px;
+    color: #bee1e6;
+    font-weight: bold;
 }
 
 .left {

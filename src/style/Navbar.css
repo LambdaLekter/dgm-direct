@@ -1,11 +1,28 @@
 /* Navbar nel quale si mostra l'utente loggato */
 .navbar {
-    display: flex;
-    background-color: red;
-    height: 70px;
+    height: 8vh;
+    padding-left: 15px;
+    background-color: #2a2a32;
+    border-style: none solid solid none;
+    border-width: 1px;
+    border-color: #40454d;
+    z-index: 3;
 }
 
 .user {
-    padding-left: 10px;
+    /* TODO: Inserire padding e roba varia */
+}
+
+.navbar p, .navbar-chat p {
+    font-size: 26px;
     font-weight: bold;
+}
+
+.navbar-chat {
+    height: 8vh;
+    background-color: #2a2a32;
+    border-style: none solid solid none;
+    border-width: 1px;
+    z-index: 2;
+    box-shadow: #202227 0 1px 7px;
 }

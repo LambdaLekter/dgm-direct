@@ -12,6 +12,6 @@ router.post('/addFriend', usersController.addFriendToUser)
 router.post('/removeFriend', usersController.removeFriendFromUser)
 router.post('/getFriends/:username', usersController.getFriendsByUsername)
 router.post('/login', usersController.validateLogin)
-router.post('/:username', usersController.getUserByUsername)
+router.post('/getChats/:username', usersController.getChatsByUsername)
 
 module.exports = router

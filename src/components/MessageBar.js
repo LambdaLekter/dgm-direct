@@ -17,11 +17,10 @@ export default function MessageBar({submitHandler}) {
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13 && e.shiftKey) {
-            console.log("Premuto Enter")
-            // TODO: Permettere di inviare il messaggio, avviando quindi il submitHandler
         } else if (e.keyCode === 13 && !e.shiftKey) {
             e.preventDefault();
-            console.log("Premuti Enter e Shift")
+            textInput.current.style.height = 'auto';
+            submitHandler(null)
         }
     }
 
@@ -33,7 +32,7 @@ export default function MessageBar({submitHandler}) {
     }
 
     return (
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} id="form-input">
             <InputGroup>
                 <Form.Control
                     as="textarea"
@@ -44,12 +43,6 @@ export default function MessageBar({submitHandler}) {
                     onChange={adjustInputHeight}
                     ref={textInput}
                 />
-                {/*<Form.Control*/}
-                {/*    type="text"*/}
-                {/*    id="message-bar-input"*/}
-                {/*    placeholder="Scrivi un messaggio"*/}
-                {/*    autoComplete="off"*/}
-                {/*/>*/}
                 <Button size="lg" type="submit">
                     <FontAwesomeIcon icon={faPaperPlane}/>
                 </Button>
