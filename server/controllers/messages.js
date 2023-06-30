@@ -13,6 +13,7 @@ module.exports = {
 
             chat = chat.map( message => {
                 return {
+                    _id: message._id,
                     author: user1._id.equals(message.author) ? user1.username : user2.username,
                     receiver: user1._id.equals(message.receiver) ? user1.username : user2.username,
                     text: message.text,

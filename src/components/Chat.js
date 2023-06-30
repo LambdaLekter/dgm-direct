@@ -35,21 +35,18 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
             time: currentDate
         };
 
+        // Controllo per inviare un messaggio solo qualora il campo di testo contenga qualcosa
         if (msgText !== "") {
-            // * Controllo per inviare un messaggio solo qualora il campo di testo contenga qualcosa
-
             axios.post('http://localhost:3001/api/messages/addMessage', message)
                 .then(res => {
                     console.log("Messaggio creato con successo")
-                    console.log(res.data)
+                    setMessages([...messages, res.data])
+                    msgInput.value = ""
+                    scrollToBottom()
                 })
                 .catch(error => {
                     console.error(error);
                 });
-
-            scrollToBottom()
-            msgInput.value = ""
-            setMessages([...messages, {text: msgText, author: loggedUser, time: currentDate}])
         }
     }
 
