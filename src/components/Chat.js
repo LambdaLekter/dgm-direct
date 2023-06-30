@@ -10,10 +10,6 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
     const chatRef = useRef(null);
     let firstScroll = false
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages])
-
     const scrollToBottom = () => {
         if (chatRef.current) {
             if(!firstScroll) {
@@ -30,12 +26,13 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
         event.preventDefault()
         const msgInput = document.getElementById("message-bar-input")
         const msgText = msgInput.value
+        const currentDate = Date.now()
 
         const message = {
             author: loggedUser,
             receiver: receiver,
             text: msgText,
-            time: Date.now()
+            time: currentDate
         };
 
         if (msgText !== "") {
@@ -52,30 +49,30 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
 
             scrollToBottom()
             msgInput.value = ""
-            setMessages([...messages, {text: msgText, author: loggedUser}])
+            setMessages([...messages, {text: msgText, author: loggedUser, time: currentDate}])
         }
     }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages])
 
     return (
         <Container fluid>
             <Row>
-                <Col>
+                <Col ref={chatRef}>
                     {friendless ?
                         (<div id="friendless-message">
-                            Aggiungi un amico per cominciare a chattare!
+                            Aggiungi un amico per iniziare a chattare!
                         </div>) :
-                        (<div id="messages" ref={chatRef}>
+                        (<div id="messages">
                             {messages.map((message, idx) => {
                                 let side = message.author === loggedUser ? "right" : "left"
                                 return <MessageItem key={"msg" + idx} message={message} side={side}/>
                             })}
                         </div>)
                     }
-                    {friendless ? null :
-                        (<div id="message-bar">
-                            <MessageBar submitHandler={sendMessage}/>
-                        </div>)
-                    }
+                    { !friendless && <div id="message-bar"> <MessageBar submitHandler={sendMessage}/> </div> }
                 </Col>
             </Row>
         </Container>

@@ -1,4 +1,4 @@
-import ChatItem from "./ChatsListItem";
+import ChatListItem from "./ChatsListItem";
 import axios from "axios";
 
 export default function FriendsBar({friends, setFriends, loggedUser, setFriendless}) {
@@ -23,9 +23,9 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
 
     const getFriendsItems = () => {
         if(friends && friends.length > 0){
-             return friends.map((friend, idx) =>
-                <ChatItem key={"friend" + idx} chatUser={friend}/>
-             )
+             return friends.map((friend, idx) => {
+                 return <ChatListItem key={"friend" + idx} chatUser={friend}/>
+             } )
         } else {
             return <div>Inserisci il tuo primo amico!</div>
         }

@@ -24,12 +24,19 @@ html {
     padding-top: 10px;
 }
 
+#button-bar-div button {
+    width: 45px;
+    height: 45px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #side-list {
     z-index: 1;
     background-color: #343840;
     box-shadow: #202227 1px 0 7px;
     height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
 
 }
 
@@ -55,7 +62,7 @@ html {
     background-color: #42464e;
     flex: 1 1 auto;
     height: 100vh;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 #chat::-webkit-scrollbar {

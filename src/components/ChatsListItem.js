@@ -1,4 +1,4 @@
-export default function ChatsListItem({user}) {
+export default function ChatsListItem({chatUser}) {
     return (
         <>
             <div className="userChat">
@@ -6,7 +6,8 @@ export default function ChatsListItem({user}) {
                 <img src="https://picsum.photos/200" alt=""/>
                 {/*<img src={} alt=""/>*/}
                 <div className="userChatInfo">
-                    <span>{user.username}</span>
+                    { chatUser ? <span>{chatUser.username}</span>
+                    : <span>[Dati non trovati]</span> }
                 </div>
             </div>
 

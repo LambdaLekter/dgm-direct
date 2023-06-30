@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il default
+    const [loggedUser, setLoggedUser] = useState("sorm") // TODO rimuovere il default
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [messages, setMessages] = useState([])
@@ -20,8 +20,8 @@ export default function ChatPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        let init = async () => {
-            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${loggedUser}`)
+        let init = async (user) => {
+            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
             let friendsData = res.data
             setFriends(friendsData)
 
@@ -43,10 +43,10 @@ export default function ChatPage() {
         //     setLoggedUser(cookies.get("username"))
         // }
 
-        init().then(() => console.log("Inizializzazione effettuata"))
+        init(loggedUser).then(() => console.log("Inizializzazione effettuata"))
     }, [])
 
-    const friendsStates = [friends, setFriends, setFriendless]
+    const friendsStates = {friends, setFriends, setFriendless}
 
     return (
         <>
@@ -60,8 +60,6 @@ export default function ChatPage() {
 
                         <Col md={3} id="side-list">
                             { /* TODO: Div per la lista delle chat o degli amici */}
-                            { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
-
                             <Sidebar
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}
