@@ -6,12 +6,12 @@ module.exports = {
         try {
             let user1 = await User.findOne({username: req.params.user1})
             let user2 = await User.findOne({username: req.params.user2})
-            let chat = await Message.find({ $or: [
+            let messages = await Message.find({ $or: [
                 {author: user1._id, receiver: user2._id},
                 {author: user2._id, receiver: user1._id}
             ] })
 
-            chat = chat.map( message => {
+            messages = messages.map( message => {
                 return {
                     _id: message._id,
                     author: user1._id.equals(message.author) ? user1.username : user2.username,
@@ -21,14 +21,13 @@ module.exports = {
                 }
             } )
 
-            res.json(chat)
+            res.status(200).json(messages)
         } catch (err) {
-            console.log("Errore in getMessagesByUsernames")
             res.send(`<h1>${err}</h1>`)
         }
     },
 
-    addMessage: async (req, _) => {
+    addMessage: async (req, res) => {
         let author = await User.findOne({username: req.body.author})
         let receiver = await User.findOne({username: req.body.receiver})
         Message.create({
@@ -36,6 +35,6 @@ module.exports = {
             receiver: receiver._id,
             text: req.body.text,
             time: new Date(req.body.time)
-        }).then( r => console.log(`Messaggio inserito: ${r}`) )
+        }).then( message => res.status(200).json(message) )
     }
 }

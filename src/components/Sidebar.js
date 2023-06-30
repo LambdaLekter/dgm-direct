@@ -11,21 +11,30 @@ const init_chats = [
     {user: {username: "Filippo"}}
 ]
 
-export default function Sidebar({loggedUser, selectedTab, friendsStates}) {
+export default function Sidebar({loggedUser, selectedTab, friendsStates, setReceiver, updateMessages}) {
     return (
         <div>
             <Navbar loggedUser={loggedUser}/>
             { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
-            {selectedTab === "F" &&
+            { selectedTab === "F" &&
                 <FriendsBar
                     friends={friendsStates.friends}
                     setFriends={friendsStates.setFriends}
                     loggedUser={loggedUser}
-                    setFriendless={friendsStates.setFriendless} /> }
-            {selectedTab === "C" &&
-                <ChatsList chats_list={init_chats} /> }
-            {selectedTab === "N" &&
-                <div> Coming soon... </div>}
+                    setFriendless={friendsStates.setFriendless}
+                    setReceiver={setReceiver}
+                    updateMessages={updateMessages} />
+            }
+            { selectedTab === "C" &&
+                <ChatsList
+                    chats_list={init_chats}
+                    loggedUser={loggedUser}
+                    setReceiver={setReceiver}
+                    updateMessages={updateMessages} />
+            }
+            { selectedTab === "N" &&
+                <div> Coming soon... </div>
+            }
         </div>
     )
 }
