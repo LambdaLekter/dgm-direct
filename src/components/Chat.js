@@ -18,10 +18,9 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
                 firstScroll = true
             } else {
                 chatRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                firstScroll = true
             }
         }
-    };
+    }
 
     const sendMessage = (event) => {
         event.preventDefault()

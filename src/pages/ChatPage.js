@@ -19,17 +19,21 @@ export default function ChatPage() {
     const cookies = new Cookies();
     const navigate = useNavigate();
 
+    const updateMessages = async (user1, user2) => {
+        const res = await axios.post(`http://localhost:3001/api/messages/${user1}/${user2}`)
+        setMessages(res.data)
+    }
+
     useEffect(() => {
-        let init = async (user) => {
-            let res = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
-            let friendsData = res.data
+        const init = async (user) => {
+            const res = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
+            const friendsData = res.data
             setFriends(friendsData)
 
             if (friendsData.length > 0) {
-                const receiverUsername = friendsData[0].username
-                setReceiver(receiverUsername)
-                res = await axios.post(`http://localhost:3001/api/messages/${loggedUser}/${receiverUsername}`)
-                setMessages(res.data)
+                const receiverUser = friendsData[0].username
+                setReceiver(receiverUser)
+                await updateMessages(loggedUser, receiverUser)
             } else {
                 setFriendless(true)
             }
@@ -62,6 +66,8 @@ export default function ChatPage() {
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}
                                 friendsStates={friendsStates}
+                                setReceiver={setReceiver}
+                                updateMessages={updateMessages}
                             />
                         </Col>
 

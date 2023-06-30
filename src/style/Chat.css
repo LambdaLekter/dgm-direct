@@ -19,3 +19,17 @@
     bottom: 0;
     padding: 20px;
 }
+
+#message-bar textarea {
+    resize: none;
+    overflow-y: auto;
+}
+#message-bar textarea::-webkit-scrollbar, #message-bar input::-webkit-scrollbar {
+    display: none;
+}
+
+#message-bar textarea:focus, #message-bar input:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

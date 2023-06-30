@@ -58,7 +58,7 @@ html {
 
 .message-item-left {
     position: relative;
-    margin-left: 20px;
+    margin-left: 25px;
     margin-bottom: 10px;
     padding: 10px;
     background-color: lightslategrey;
@@ -66,7 +66,7 @@ html {
     border: 1px solid #97C6E3;
     border-radius: 10px;
     box-shadow: #282c34 2px 2px 7px;
-    max-width: 50%;
+    max-width: 40%;
     max-height: 100%;
 }
 
@@ -74,14 +74,15 @@ html {
     display: inline-block;
     position: relative;
     margin-bottom: 10px;
-    margin-left: calc(100% - 240px);
+    margin-left: 60%;
+    margin-right: 25px;
     padding: 10px;
     background-color: lightslategrey;
     text-align: left;
     border: 1px solid #97C6E3;
     border-radius: 10px;
     box-shadow: #282c34 2px 2px 7px;
-    max-width: 100%;
+    max-width: 40%;
     max-height: 100%;
     box-sizing: border-box;
 }
