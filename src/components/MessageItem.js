@@ -62,6 +62,7 @@ export default function MessageItem({message, side, messages, setMessages}) {
             </div>
             {contextMenuPosition &&
                 (<CustomContextMenu
+                    side={side}
                     position={contextMenuPosition}
                     onCopy={handleCopy}
                     onDelete={handleDelete}

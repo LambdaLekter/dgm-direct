@@ -18,6 +18,8 @@ export default function LoginForm(props) { // eslint-disable-next-line
     const cookies = new Cookies();
 
     useEffect(() => {
+        document.title = 'DGM Direct | Login';
+
         // Verifica se il cookie è impostato
         if (cookies.get("username")) {
             console.log(cookies.get("username"))
@@ -71,6 +73,7 @@ export default function LoginForm(props) { // eslint-disable-next-line
                                                               placeholder="Inserire username o email"
                                                               value={username}
                                                               onChange={e => setUsername(e.target.value)}
+                                                              autoComplete="off"
                                                               required
                                                 />
                                             </FloatingLabel>

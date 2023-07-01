@@ -23,7 +23,6 @@
 #message-bar {
     position: sticky;
     bottom: 0;
-    margin: 10px;
 }
 
 #message-bar textarea {
@@ -44,7 +43,6 @@
 
 /* Contenitore della chat */
 #chat-wrapper {
-    padding-top: 15px;
     display: flex;
     flex-direction: column;
     height: 92vh;

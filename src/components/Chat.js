@@ -56,14 +56,14 @@ export default function Chat({messages, setMessages, loggedUser, receiver, chatS
             <Row>
                 <Col style={{padding: 0}}>
                     {!chatSet.initialChat &&
-                        <Navbar className="navbar-chat">
+                        <Navbar className="navbar-chat" onContextMenu={e => e.preventDefault()}>
                             <div className="user">{receiver}</div>
                         </Navbar>
                     }
 
                     <div id="chat-wrapper" onContextMenu={e => e.preventDefault()}>
                         {chatSet.initialChat ?
-                            (<div id="friendless-message">
+                            (<div id="friendless-message" onContextMenu={e => e.preventDefault()}>
                                 Aggiungi un amico o seleziona una chat <br/>per iniziare a chattare!
                             </div>) :
                             (<div id="messages" ref={chatRef}>

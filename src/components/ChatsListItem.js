@@ -1,4 +1,5 @@
 import '../style/ChatList.css'
+import userImage from "../img/user.png";
 
 export default function ChatsListItem({loggedUser, chatUser, chatMessage, setReceiver, updateMessages, setInitialChat}) {
     const changeReceiver = () => {
@@ -11,8 +12,7 @@ export default function ChatsListItem({loggedUser, chatUser, chatMessage, setRec
     return (
         <>
             <div className="userChat" onClick={changeReceiver}>
-                {/* TODO: Assegnare agli utente l'immagine di profilo standard */}
-                <img src="https://picsum.photos/200" alt=""/>
+                <img src={userImage} alt=""/>
                 <div className="userChatInfo">
                     { chatUser ? <div>{chatUser.username}</div> : <div>[Dati non trovati]</div> }
                     { chatMessage && <div className="last-chat-message">{chatMessage.text}</div> }

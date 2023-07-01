@@ -32,6 +32,16 @@ export default function ChatPage() {
         }
     };
 
+    const changeDocTitle = () => {
+        if (selectedTab === "C") {
+            document.title = 'DGM Direct - Le tue chat';
+        } else if(selectedTab === "F") {
+            document.title = 'DGM Direct - I tuoi amici';
+        } else if (selectedTab === "N") {
+            document.title = 'DGM Direct - Notifiche';
+        }
+    }
+
     useEffect(() => {
         const init = async (user) => {
             const friendsRes = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
@@ -67,6 +77,7 @@ export default function ChatPage() {
         //     setLoggedUser(loggedUsername)
         // }
 
+
         init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
 
         document.addEventListener("keydown", handleEscape);
@@ -74,6 +85,11 @@ export default function ChatPage() {
             document.removeEventListener("keydown", handleEscape);
         }
     }, [])
+
+    useEffect(() => {
+        changeDocTitle()
+    }, [selectedTab])
+
 
     const friendsStates = {friends, setFriends}
     const chatSet = {chats, setChats, initialChat, setInitialChat}
@@ -83,11 +99,11 @@ export default function ChatPage() {
             <div>
                 <Container className="App" fluid>
                     <Row>
-                        <Col md={1} id="button-bar-div">
-                            <ButtonsBar setSelectedTab={setSelectedTab}/>
+                        <Col md={1} id="button-bar-div" onContextMenu={e => e.preventDefault()}>
+                            <ButtonsBar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
                         </Col>
 
-                        <Col md={3} id="side-tab">
+                        <Col md={3} id="side-tab" onContextMenu={e => e.preventDefault()}>
                             <Sidebar
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}
@@ -115,5 +131,4 @@ export default function ChatPage() {
 }
 
 // TODO: Sistemare l'input text usato per la ricerca di un nuovo amico
-// TODO: Mantenere lo stato di selezionato sui pulsanti nella ButtonsBar
-// TODO: Inserire lo stato di selezionato sulle chat nella lista
+// TODO: Inserire lo stato di selezionato sulle chat nella ChatsList

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Dropdown} from "react-bootstrap";
 
-export default function CustomContextMenu({position, onCopy, onDelete, onClose, state, setState}) {
+export default function CustomContextMenu({position, onCopy, onDelete, onClose, state, setState, side}) {
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -24,7 +24,9 @@ export default function CustomContextMenu({position, onCopy, onDelete, onClose, 
                 {state && (
                     <Dropdown.Menu show ref={menuRef}>
                         <Dropdown.Item onClick={onCopy}>Copia messaggio</Dropdown.Item>
-                        <Dropdown.Item onClick={onDelete}>Elimina messaggio</Dropdown.Item>
+                        {side === "right" &&
+                            <Dropdown.Item onClick={onDelete}>Elimina messaggio</Dropdown.Item>
+                        }
                     </Dropdown.Menu>
                 )}
             </div>

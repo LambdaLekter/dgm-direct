@@ -6,12 +6,12 @@
     margin-right: auto;
 }
 
-.navbar-button:hover, .navbar-button:focus {
+.navbar-button:hover {
     background-color: white;
     color: black;
 }
 
-.navbar-button.selected {
+.selected {
     background-color: white;
     color: black;
 }

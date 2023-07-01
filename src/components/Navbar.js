@@ -6,7 +6,7 @@ export default function Navbar({selectedTab}) {
     const cookie = new Cookie()
 
     return (
-        <div className="navbar">
+        <div className="navbar" onContextMenu={e => e.preventDefault()}>
             {/*<img src={currentUser.photoURL} alt="" className="imgProfile"/>*/}
             {/*<h4 className="user">{cookie.get("Username")}</span>*/}
             <div className="user">

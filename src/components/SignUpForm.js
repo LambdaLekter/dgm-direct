@@ -21,6 +21,8 @@ export default function SignUpForm() {
     const cookies = new Cookies();
 
     useEffect(() => {
+        document.title = 'DGM Direct | Registrazione';
+
         // Verifica se il cookie è impostato
         if(cookies.get("username")) {
             console.log(cookies.get("username"))
@@ -81,6 +83,7 @@ export default function SignUpForm() {
                                                           placeholder="Inserire nome"
                                                           value={firstName}
                                                           onChange={e => setFirstName(e.target.value)}
+                                                          autoComplete="off"
                                                           required
                                             />
                                         </FloatingLabel>
@@ -93,6 +96,7 @@ export default function SignUpForm() {
                                                           placeholder="Inserire cognome"
                                                           value={lastName}
                                                           onChange={e => setLastName(e.target.value)}
+                                                          autoComplete="off"
                                                           required
                                             />
                                         </FloatingLabel>
@@ -109,6 +113,7 @@ export default function SignUpForm() {
                                                               placeholder="Inserire username"
                                                               value={username}
                                                               onChange={e => setUsername(e.target.value)}
+                                                              autoComplete="off"
                                                               required
                                                 />
                                             </FloatingLabel>
@@ -125,6 +130,7 @@ export default function SignUpForm() {
                                                               placeholder="Inserire indirizzo email"
                                                               value={email}
                                                               onChange={e => setEmail(e.target.value)}
+                                                              autoComplete="off"
                                                               required
                                                 />
                                             </FloatingLabel>
