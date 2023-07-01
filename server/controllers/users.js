@@ -75,7 +75,10 @@ module.exports = {
                                     : User.findOne({_id: message.author})
                             )
                             Promise.all(usersPromises).then(users => {
-                                res.status(200).json(uniqueUsers(users))
+                                const chats = users.map((user, idx) => {
+                                    return {user: user, message: messages[idx]}
+                                })
+                                res.status(200).json(chats)
                             })
                         } )
                 })

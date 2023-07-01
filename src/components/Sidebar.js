@@ -15,7 +15,7 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        } },
+        }, message: {}},
     { user: {
             _id: "649972077a92e418bbb3e00e",
             firstName: "Sara",
@@ -27,7 +27,7 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        } },
+        }},
     { user: {
             _id: "64970a32e2b1ba30107e22f7",
             firstName: "Bruno",
@@ -40,7 +40,7 @@ const init_chats = [
                 "649c5b58a16ded706a4d619d"
             ],
             __v: 0
-        } },
+    } },
     { user: {
             _id: "649972077a92e418bbb3e00e",
             firstName: "Sara",
@@ -52,7 +52,7 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        } },
+        }},
     { user: {
             _id: "64970a32e2b1ba30107e22f7",
             firstName: "Bruno",
@@ -68,7 +68,7 @@ const init_chats = [
         } }
 ]
 
-export default function Sidebar({loggedUser, selectedTab, friendsStates, setReceiver, updateMessages}) {
+export default function Sidebar({loggedUser, selectedTab, friendsStates, chatsStates, setReceiver, updateMessages}) {
     return (
         <div>
             <Navbar selectedTab={selectedTab}/>
@@ -76,9 +76,9 @@ export default function Sidebar({loggedUser, selectedTab, friendsStates, setRece
                 { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
                 { selectedTab === "F" &&
                     <FriendsBar
+                        loggedUser={loggedUser}
                         friends={friendsStates.friends}
                         setFriends={friendsStates.setFriends}
-                        loggedUser={loggedUser}
                         setFriendless={friendsStates.setFriendless}
                         setReceiver={setReceiver}
                         updateMessages={updateMessages} />
@@ -86,8 +86,10 @@ export default function Sidebar({loggedUser, selectedTab, friendsStates, setRece
                 { selectedTab === "C" &&
                     <ChatsList
                         className="side-list-chats"
-                        chats_list={init_chats} // TODO inserire le chat attive
                         loggedUser={loggedUser}
+                        chats={chatsStates.chats}
+                        setChats={chatsStates.setChats}
+                        setChatless={chatsStates.setChatless}
                         setReceiver={setReceiver}
                         updateMessages={updateMessages} />
                 }
@@ -98,5 +100,3 @@ export default function Sidebar({loggedUser, selectedTab, friendsStates, setRece
         </div>
     )
 }
-
-// TODO ombra sotto la navbar?

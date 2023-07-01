@@ -8,13 +8,16 @@ import Sidebar from "../components/Sidebar";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row} from "react-bootstrap";
+import {uniqueChats} from "../utils";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("nonno") // TODO rimuovere il default
+    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il valore di default
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
+    const [chats, setChats] = useState([])
     const [messages, setMessages] = useState([])
     const [friendless, setFriendless] = useState(false)
+    const [chatless, setChatless] = useState(false)
     const [selectedTab, setSelectedTab] = useState("C")
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -26,31 +29,45 @@ export default function ChatPage() {
 
     useEffect(() => {
         const init = async (user) => {
-            const res = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
-            const friendsData = res.data
+            const friendsRes = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
+            const friendsData = friendsRes.data
             setFriends(friendsData)
 
+            const chatsRes = await axios.post(`http://localhost:3001/api/users/getChats/${user}`)
+            const chatsData = uniqueChats(chatsRes.data)
+            setChats(chatsData)
+
             if (friendsData.length > 0) {
-                const receiverUser = friendsData[0].username
+                let receiverUser;
+                if(chatsData.length > 0) {
+                    receiverUser = chatsData[0].user.username
+                } else {
+                    setChatless(true)
+                    receiverUser = friendsData[0].username
+                }
                 setReceiver(receiverUser)
                 await updateMessages(loggedUser, receiverUser)
             } else {
                 setFriendless(true)
+                setChatless(true)
             }
         }
 
         // Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
+        let loggedUsername = loggedUser
         // if(!cookies.get("username")) {
         //     console.log("Login non effettuato. Reindirizzamento...")
         //     navigate("/login");
         // } else {
-        //     setLoggedUser(cookies.get("username"))
+        //     loggedUsername = cookies.get("username")
+        //     setLoggedUser(loggedUsername)
         // }
 
-        init(loggedUser).then(() => console.log("Inizializzazione effettuata"))
+        init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
     }, [])
 
     const friendsStates = {friends, setFriends, setFriendless}
+    const chatsStates = {chats, setChats, setChatless}
 
     return (
         <>
@@ -66,6 +83,7 @@ export default function ChatPage() {
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}
                                 friendsStates={friendsStates}
+                                chatsStates={chatsStates}
                                 setReceiver={setReceiver}
                                 updateMessages={updateMessages}
                             />

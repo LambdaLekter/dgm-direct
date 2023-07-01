@@ -13,10 +13,10 @@ module.exports = {
         return d
     },
 
-    uniqueUsers: (list) => {
-        const id_set = [...new Set(list.map(user => user._id))]
-        return id_set.map( id =>
-            list.filter(user => user._id === id)[0]
+    uniqueChats: (chats) => {
+        const id_setlist = [...new Set(chats.map(chat => chat.user._id))]
+        return id_setlist.map( id =>
+            chats.filter(chat => chat.user._id === id)[0]
         )
     }
 }

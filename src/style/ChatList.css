@@ -32,3 +32,8 @@
     font-size: 14px;
     color: lightgray;
 }
+
+.last-chat-message {
+    font-size: 13px;
+    color: #868686;
+}

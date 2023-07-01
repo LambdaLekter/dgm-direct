@@ -1,6 +1,6 @@
 import '../style/ChatList.css'
 
-export default function ChatsListItem({loggedUser, chatUser, setReceiver, updateMessages}) {
+export default function ChatsListItem({loggedUser, chatUser, chatMessage, setReceiver, updateMessages}) {
     const changeReceiver = () => {
         const receiverUser = chatUser.username
         setReceiver(receiverUser)
@@ -14,8 +14,8 @@ export default function ChatsListItem({loggedUser, chatUser, setReceiver, update
                 <img src="https://picsum.photos/200" alt=""/>
                 {/*<img src={} alt=""/>*/}
                 <div className="userChatInfo">
-                    { chatUser ? <span>{chatUser.username}</span>
-                    : <span>[Dati non trovati]</span> }
+                    { chatUser ? <div>{chatUser.username}</div> : <div>[Dati non trovati]</div> }
+                    { chatMessage && <div className="last-chat-message">{chatMessage.text}</div> }
                 </div>
             </div>
         </>

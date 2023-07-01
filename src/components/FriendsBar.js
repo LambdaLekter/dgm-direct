@@ -39,7 +39,6 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
 
     return (
         <div id="friends-bar">
-            <h3> Amici di {loggedUser} </h3>
             <form onSubmit={onAddFriend}>
                 <input type="text"/>
                 <input type="submit" value="+"/>

@@ -1,8 +1,13 @@
 /* Visualizzazione amici dell'utente loggato */
+#friends-bar form {
+    width: 80%;
+    margin: 15px auto;
+}
+
 #friends-bar input[type="text"] {
-    width: 90%
+    width: 80%;
 }
 
 #friends-bar input[type="submit"] {
-    width: 10%
+    width: 20%;
 }
