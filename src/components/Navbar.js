@@ -10,9 +10,9 @@ export default function Navbar({selectedTab}) {
             {/*<img src={currentUser.photoURL} alt="" className="imgProfile"/>*/}
             {/*<h4 className="user">{cookie.get("Username")}</span>*/}
             <div className="user">
-                {selectedTab === "C" && <p>Le tue chat</p>}
-                {selectedTab === "F" && <p>I tuoi amici</p>}
-                {selectedTab === "N" && <p>Notifiche</p>}
+                {selectedTab === "C" && <>Le tue chat</>}
+                {selectedTab === "F" && <>I tuoi amici</>}
+                {selectedTab === "N" && <>Notifiche</>}
             </div>
         </div>
     )

@@ -86,3 +86,9 @@ export default function ChatPage() {
         </>
     )
 }
+
+// TODO: Sistemare l'input text usato per la ricerca di un nuovo amico
+// TODO: Mantenere lo stato di selezionato sui pulsanti nella ButtonsBar
+// TODO: Inserire lo stato di selezionato sulle chat nella lista
+// TODO: bypassare la scritta per friendless se esiste una chat
+// TODO: Sistemare message-bar che, in assenza di messaggi, si sposta in alto (ricordare le modifiche fatte su chat-wrapper)

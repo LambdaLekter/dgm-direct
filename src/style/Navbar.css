@@ -10,10 +10,6 @@
 }
 
 .user {
-    /* TODO: Inserire padding e roba varia */
-}
-
-.navbar p, .navbar-chat p {
     font-size: 26px;
     font-weight: bold;
 }

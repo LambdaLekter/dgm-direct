@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import MessageItem from "./MessageItem";
 import MessageBar from "./MessageBar";
 import axios from "axios";
@@ -10,16 +10,13 @@ import {Container, Col, Row, Navbar} from "react-bootstrap";
 
 export default function Chat({messages, setMessages, loggedUser, receiver, friendless}) {
     const chatRef = useRef(null);
-    let firstScroll = false
+    const [firstScroll, setFirstScroll] = useState(false);
 
     const scrollToBottom = () => {
         if (chatRef.current) {
-            if (!firstScroll) {
-                chatRef.current.scrollIntoView({block: 'end'});
-                firstScroll = true
-            } else {
-                chatRef.current.scrollIntoView({behavior: 'smooth', block: 'end'});
-            }
+            chatRef.current.scrollTo({
+                top: chatRef.current.scrollHeight
+            });
         }
     }
 
@@ -58,14 +55,14 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
     return (
         <Container fluid>
             <Row>
-                <Col ref={chatRef} style={{padding: 0}}>
+                <Col style={{padding: 0}}>
                     {!friendless &&
                         <Navbar className="navbar-chat">
-                            <p>{receiver}</p>
+                            <div className="user">{receiver}</div>
                         </Navbar>
                     }
 
-                    <div id="chat-wrapper">
+                    <div id="chat-wrapper" ref={chatRef} onContextMenu={e => e.preventDefault()}>
                         {friendless ?
                             (<div id="friendless-message">
                                 Aggiungi un amico per iniziare a chattare!
