@@ -36,7 +36,7 @@ export default function LoginForm(props) { // eslint-disable-next-line
         }
         setValidated(true)
 
-        // Verifica del login dal database
+        // * Verifica del login dal database
         const user = {
             username: username,
             password: password
@@ -68,7 +68,7 @@ export default function LoginForm(props) { // eslint-disable-next-line
                                     <Row className="mb-2">
                                         <InputGroup className="mb-2" hasValidation>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
-                                            <FloatingLabel label="Username o email">
+                                            <FloatingLabel label="Username">
                                                 <Form.Control type="text" id="inputUsername"
                                                               placeholder="Inserire username o email"
                                                               value={username}

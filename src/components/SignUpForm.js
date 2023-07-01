@@ -74,7 +74,7 @@ export default function SignUpForm() {
                         <Col>
                             <Form className="bg-white p-4 pb-2 rounded-4" noValidate validated={validated}
                                   onSubmit={handleSubmit}>
-                                <h2 align="center">Registrati sulla piattaforma</h2>
+                                <h2 align="center">Registrazione</h2>
                                 <Row className="mb-2">
                                     <Col className="my-1">
                                         <FloatingLabel label="Nome">

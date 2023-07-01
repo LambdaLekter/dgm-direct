@@ -11,9 +11,10 @@
     border-color: #40454d;
 }
 
-.userChat:hover, .selected {
+.userChat:hover, .selected-chat {
     color: black;
     background-color: #bee1e6;
+    font-weight: bold;
 }
 
 .userChat > img {

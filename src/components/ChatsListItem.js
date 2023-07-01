@@ -22,7 +22,7 @@ export default function ChatsListItem({
     return (
         <>
             <div
-                className={`userChat ${isSelected ? "selected" : ""}`}
+                className={`userChat ${isSelected ? "selected-chat" : ""}`}
                 onClick={changeReceiver}>
                 <img src={userImage} alt=""/>
                 <div className="userChatInfo">

@@ -31,7 +31,7 @@ export default function ButtonsBar({selectedTab, setSelectedTab,setLoggedUser}) 
                 title="Le tue chat"
                 variant="primary"
                 size="md"
-                className={`rounded-circle mb-3 navbar-button ${selectedTab === "C" ? "selected" : ""}`}
+                className={`rounded-circle mb-3 navbar-button ${selectedTab === "C" ? "selected-button" : ""}`}
                 onClick={getHandler("C")}>
                 <FontAwesomeIcon icon={faComments}/>
             </Button>
@@ -39,7 +39,7 @@ export default function ButtonsBar({selectedTab, setSelectedTab,setLoggedUser}) 
                 title="Amici"
                 variant="primary"
                 size="md"
-                className={`rounded-circle mb-3 navbar-button ${selectedTab === "F" ? "selected" : ""}`}
+                className={`rounded-circle mb-3 navbar-button ${selectedTab === "F" ? "selected-button" : ""}`}
                 onClick={getHandler("F")}>
                 <FontAwesomeIcon icon={faUserGroup}/>
             </Button>
@@ -47,7 +47,7 @@ export default function ButtonsBar({selectedTab, setSelectedTab,setLoggedUser}) 
                 title="Notifiche"
                 variant="primary"
                 size="md"
-                className={`rounded-circle mb-5 navbar-button ${selectedTab === "N" ? "selected" : ""}`}
+                className={`rounded-circle mb-5 navbar-button ${selectedTab === "N" ? "selected-button" : ""}`}
                 onClick={getHandler("N")}>
                 <FontAwesomeIcon icon={faBell}/>
             </Button>

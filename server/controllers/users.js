@@ -57,10 +57,14 @@ module.exports = {
         const user = await User.findOne({username: req.body.username})
 
         if (!user) {
-            return res.status(404).json({ error: 'Utente non trovato' });
+            return res.status(404).json({error: 'Utente non trovato'});
         } else {
-            return valid ? res.status(200).json({message: 'Accesso effettuato con successo'})
-                : res.status(401).json({error: 'Password non valida'});
+            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+
+            if (!isPasswordValid) {
+                return res.status(401).json({error: 'Password non valida'});
+            }
+            res.status(200).json({message: 'Accesso effettuato con successo'})
         }
     },
 
@@ -69,8 +73,8 @@ module.exports = {
             User.findOne({username: req.params.username})
                 .then(loggedUser => {
                     Message.find({$or: [{author: loggedUser._id}, {receiver: loggedUser._id}]})
-                        .then( messages => {
-                            let usersPromises = messages.map( message =>
+                        .then(messages => {
+                            let usersPromises = messages.map(message =>
                                 message.author.equals(loggedUser._id) ? User.findOne({_id: message.receiver})
                                     : User.findOne({_id: message.author})
                             )
@@ -80,9 +84,9 @@ module.exports = {
                                 })
                                 res.status(200).json(chats)
                             })
-                        } )
+                        })
                 })
-        } catch(error) {
+        } catch (error) {
             res.send(`<h1>${error}</h1>`)
         }
     }
