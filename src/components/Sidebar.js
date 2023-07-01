@@ -89,6 +89,7 @@ export default function Sidebar({loggedUser, selectedTab, friendsStates, chatsSt
                         loggedUser={loggedUser}
                         chats={chatsStates.chats}
                         setChats={chatsStates.setChats}
+                        chatless={chatsStates.chatless}
                         setChatless={chatsStates.setChatless}
                         setReceiver={setReceiver}
                         updateMessages={updateMessages} />

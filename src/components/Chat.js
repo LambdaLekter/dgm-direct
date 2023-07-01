@@ -62,12 +62,12 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
                         </Navbar>
                     }
 
-                    <div id="chat-wrapper" ref={chatRef} onContextMenu={e => e.preventDefault()}>
+                    <div id="chat-wrapper"  onContextMenu={e => e.preventDefault()}>
                         {friendless ?
                             (<div id="friendless-message">
                                 Aggiungi un amico per iniziare a chattare!
                             </div>) :
-                            (<div id="messages">
+                            (<div id="messages" ref={chatRef}>
                                 {messages.map((message, idx) => {
                                     let side = message.author === loggedUser ? "right" : "left"
                                     return <MessageItem key={"msg" + idx} message={message} side={side}/>

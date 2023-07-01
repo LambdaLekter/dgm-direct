@@ -11,7 +11,7 @@ import {Container, Col, Row} from "react-bootstrap";
 import {uniqueChats} from "../utils";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il valore di default
+    const [loggedUser, setLoggedUser] = useState("nonno") // TODO rimuovere il valore di default
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [chats, setChats] = useState([])
@@ -67,7 +67,7 @@ export default function ChatPage() {
     }, [])
 
     const friendsStates = {friends, setFriends, setFriendless}
-    const chatsStates = {chats, setChats, setChatless}
+    const chatsStates = {chats, setChats, chatless, setChatless}
 
     return (
         <>

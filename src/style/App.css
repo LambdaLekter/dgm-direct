@@ -62,16 +62,6 @@ html {
     padding: 0;
 }
 
-#chat-wrapper {
-    overflow-y: auto;
-    height: 92vh;
-    background-color: #42464e;
-}
-
-#chat-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
 @-moz-document url-prefix() {
     * {
         scrollbar-width: none;
@@ -137,6 +127,7 @@ html {
     bottom: 5px;
     right: 5px;
     color: #2a7768;
+    padding-right: 5px;
 }
 
 .message-item-left:after {

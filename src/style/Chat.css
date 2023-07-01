@@ -11,19 +11,26 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
-/* * Necessario per mantenere l'input text fisso */
+#messages::-webkit-scrollbar {
+    display: none;
+}
+
+/* Necessario per mantenere l'input text fisso */
 #message-bar {
     position: sticky;
     bottom: 0;
-    padding: 20px;
+    margin: 10px;
 }
 
 #message-bar textarea {
     resize: none;
     overflow-y: auto;
 }
+
 #message-bar textarea::-webkit-scrollbar, #message-bar input::-webkit-scrollbar {
     display: none;
 }
@@ -32,4 +39,14 @@
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+
+/* Contenitore della chat */
+#chat-wrapper {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 92vh;
+    position: relative;
 }
