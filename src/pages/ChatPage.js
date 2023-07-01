@@ -18,6 +18,7 @@ export default function ChatPage() {
     const [messages, setMessages] = useState([])
     const [initialChat, setInitialChat] = useState(true)
     const [selectedTab, setSelectedTab] = useState("C")
+    const [selectedChat, setSelectedChat] = useState(null);
     const cookies = new Cookies();
     const navigate = useNavigate();
 
@@ -28,7 +29,8 @@ export default function ChatPage() {
 
     const handleEscape = (event) => {
         if (event.key === "Escape") {
-            setInitialChat(true);
+            setInitialChat(true)
+            setSelectedChat(null)
         }
     };
 
@@ -58,12 +60,14 @@ export default function ChatPage() {
                     receiverUser = chatsData[0].user.username
                 } else {
                     setInitialChat(true)
+                    setSelectedChat(null)
                     receiverUser = friendsData[0].username
                 }
                 setReceiver(receiverUser)
                 await updateMessages(loggedUser, receiverUser)
             } else {
                 setInitialChat(true)
+                setSelectedChat(null)
             }
         }
 
@@ -93,6 +97,7 @@ export default function ChatPage() {
 
     const friendsStates = {friends, setFriends}
     const chatSet = {chats, setChats, initialChat, setInitialChat}
+    const chatList = {selectedChat, setSelectedChat}
 
     return (
         <>
@@ -109,6 +114,7 @@ export default function ChatPage() {
                                 selectedTab={selectedTab}
                                 friendsStates={friendsStates}
                                 chatSet={chatSet}
+                                chatList={chatList}
                                 setReceiver={setReceiver}
                                 updateMessages={updateMessages}
                             />
@@ -131,4 +137,3 @@ export default function ChatPage() {
 }
 
 // TODO: Sistemare l'input text usato per la ricerca di un nuovo amico
-// TODO: Inserire lo stato di selezionato sulle chat nella ChatsList

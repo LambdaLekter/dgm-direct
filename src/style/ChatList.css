@@ -11,7 +11,7 @@
     border-color: #40454d;
 }
 
-.userChat:hover {
+.userChat:hover, .selected {
     color: black;
     background-color: #bee1e6;
 }

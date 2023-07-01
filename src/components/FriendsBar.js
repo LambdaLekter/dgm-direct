@@ -2,7 +2,16 @@ import ChatListItem from "./ChatsListItem";
 import axios from "axios";
 import '../style/FriendsBar.css'
 
-export default function FriendsBar({friends, setFriends, loggedUser, setInitialChat, setReceiver, updateMessages}) {
+export default function FriendsBar({
+                                       friends,
+                                       setFriends,
+                                       loggedUser,
+                                       setInitialChat,
+                                       setReceiver,
+                                       updateMessages,
+                                       chatList,
+                                       handleSelectChat
+                                   }) {
     const onAddFriend = (event) => {
         event.preventDefault()
         let friend_input = event.target.firstElementChild
@@ -23,17 +32,19 @@ export default function FriendsBar({friends, setFriends, loggedUser, setInitialC
     }
 
     const getFriendsItems = () => {
-        if(friends && friends.length > 0){
-             return friends.map((friend, idx) => {
-                 return <ChatListItem
-                     key={"friend" + idx}
-                     loggedUser={loggedUser}
-                     chatUser={friend}
-                     setReceiver={setReceiver}
-                     updateMessages={updateMessages}
-                     setInitialChat={setInitialChat}
-                 />
-             } )
+        if (friends && friends.length > 0) {
+            return friends.map((friend, idx) => {
+                return <ChatListItem
+                    key={friend.username}
+                    loggedUser={loggedUser}
+                    chatUser={friend}
+                    setReceiver={setReceiver}
+                    setInitialChat={setInitialChat}
+                    updateMessages={updateMessages}
+                    onSelect={() => handleSelectChat(friend.username)}
+                    isSelected={chatList.selectedChat === friend.username}
+                />
+            })
         } else {
             return <div>Inserisci il tuo primo amico!</div>
         }
@@ -45,7 +56,7 @@ export default function FriendsBar({friends, setFriends, loggedUser, setInitialC
                 <input type="text"/>
                 <input type="submit" value="+"/>
             </form>
-            { getFriendsItems() }
+            {getFriendsItems()}
         </div>
     )
 }
