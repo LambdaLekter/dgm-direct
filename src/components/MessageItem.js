@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import {showTime} from "../utils";
 import CustomContextMenu from "./CustomContextMenu";
+import '../style/MessageItem.css'
+import axios from "axios";
 
-export default function MessageItem({message, side}) {
+export default function MessageItem({message, side, messages, setMessages}) {
     const [showContextMenu, setShowContextMenu] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState(null);
 
@@ -25,9 +27,21 @@ export default function MessageItem({message, side}) {
     };
 
     const handleDelete = () => {
-        console.log("Messaggio eliminato:", message._id);
+        console.log(message)
+
         // TODO: Gestire la cancellazione del messaggio, prendendo l'_id del messaggio
-        setShowContextMenu(false);
+        axios.post("http://localhost:3001/api/messages/deleteMessage", { messageId: message._id })
+            .then((res) => {
+                console.log("Messaggio eliminato:", message._id);
+
+                const updatedMessages = messages.filter((msg) => msg._id !== message._id);
+                setMessages(updatedMessages);
+            })
+            .catch((error) => {
+                console.error("Errore durante l'eliminazione del messaggio:", error);
+            });
+
+        handleCloseContextMenu();
     };
 
     const handleCloseContextMenu = () => {

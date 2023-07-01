@@ -69,7 +69,14 @@ export default function Chat({messages, setMessages, loggedUser, receiver, chatS
                             (<div id="messages" ref={chatRef}>
                                 {messages.map((message, idx) => {
                                     let side = message.author === loggedUser ? "right" : "left"
-                                    return <MessageItem key={"msg" + idx} message={message} side={side}/>
+                                    return (
+                                        <MessageItem
+                                            key={"msg" + idx}
+                                            message={message}
+                                            side={side}
+                                            messages={messages}
+                                            setMessages={setMessages}
+                                        />)
                                 })}
                             </div>)
                         }

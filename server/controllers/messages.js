@@ -6,12 +6,14 @@ module.exports = {
         try {
             let user1 = await User.findOne({username: req.params.user1})
             let user2 = await User.findOne({username: req.params.user2})
-            let messages = await Message.find({ $or: [
-                {author: user1._id, receiver: user2._id},
-                {author: user2._id, receiver: user1._id}
-            ] })
+            let messages = await Message.find({
+                $or: [
+                    {author: user1._id, receiver: user2._id},
+                    {author: user2._id, receiver: user1._id}
+                ]
+            })
 
-            messages = messages.map( message => {
+            messages = messages.map(message => {
                 return {
                     _id: message._id,
                     author: user1._id.equals(message.author) ? user1.username : user2.username,
@@ -19,7 +21,7 @@ module.exports = {
                     text: message.text,
                     time: message.time
                 }
-            } )
+            })
 
             res.status(200).json(messages)
         } catch (err) {
@@ -35,6 +37,30 @@ module.exports = {
             receiver: receiver._id,
             text: req.body.text,
             time: new Date(req.body.time)
-        }).then( message => res.status(200).json(message) )
+        }).then(message => res.status(200).json(message))
+    },
+
+    // * SOLUZIONE DI PARA
+    // removeMessageById: async (req, res) => {
+    //     try {
+    //         const message = await Message.remove({_id: req.body.id})
+    //         res.status(200).json(message)
+    //     } catch (err) {
+    //         res.send(`<h1>${err}</h1>`)
+    //     }
+    // }
+
+
+    removeMessageById: (req, res) => {
+        const {messageId} = req.body;
+
+        Message.findByIdAndRemove(messageId)
+            .then(() => {
+                res.status(200).json({message: "Messaggio eliminato con successo"});
+            })
+            .catch((error) => {
+                console.error("Errore: ", error);
+                res.status(500).json({error: "Errore durante l'eliminazione del messaggio"});
+            });
     }
 }

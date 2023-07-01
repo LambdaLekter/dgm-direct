@@ -11,7 +11,7 @@ import {Container, Col, Row} from "react-bootstrap";
 import {uniqueChats} from "../utils";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("nonno") // TODO rimuovere il valore di default
+    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il valore di default
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [chats, setChats] = useState([])
@@ -25,6 +25,12 @@ export default function ChatPage() {
         const res = await axios.post(`http://localhost:3001/api/messages/${user1}/${user2}`)
         setMessages(res.data)
     }
+
+    const handleEscape = (event) => {
+        if (event.key === "Escape") {
+            setInitialChat(true);
+        }
+    };
 
     useEffect(() => {
         const init = async (user) => {
@@ -51,7 +57,7 @@ export default function ChatPage() {
             }
         }
 
-        // Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
+        // ! Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
         let loggedUsername = loggedUser
         // if(!cookies.get("username")) {
         //     console.log("Login non effettuato. Reindirizzamento...")
@@ -62,6 +68,11 @@ export default function ChatPage() {
         // }
 
         init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
+
+        document.addEventListener("keydown", handleEscape);
+        return () => {
+            document.removeEventListener("keydown", handleEscape);
+        }
     }, [])
 
     const friendsStates = {friends, setFriends}

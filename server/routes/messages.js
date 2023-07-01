@@ -9,5 +9,6 @@ router.get('/', (req, res) => {
 
 router.post('/:user1/:user2', messagesController.getMessagesByUsernames)
 router.post('/addMessage', messagesController.addMessage)
+router.post("/deleteMessage", messagesController.removeMessageById)
 
 module.exports = router
