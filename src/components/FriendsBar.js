@@ -2,7 +2,7 @@ import ChatListItem from "./ChatsListItem";
 import axios from "axios";
 import '../style/FriendsBar.css'
 
-export default function FriendsBar({friends, setFriends, loggedUser, setFriendless, setReceiver, updateMessages}) {
+export default function FriendsBar({friends, setFriends, loggedUser, setInitialChat, setReceiver, updateMessages}) {
     const onAddFriend = (event) => {
         event.preventDefault()
         let friend_input = event.target.firstElementChild
@@ -15,7 +15,7 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
                 console.log(`Amico aggiunto: ${res.data}`)
                 setFriends([...friends, res.data])
                 friend_input.value = ""
-                setFriendless(false)
+                setInitialChat(false)
             })
             .catch(error => {
                 console.error(error);
@@ -30,7 +30,9 @@ export default function FriendsBar({friends, setFriends, loggedUser, setFriendle
                      loggedUser={loggedUser}
                      chatUser={friend}
                      setReceiver={setReceiver}
-                     updateMessages={updateMessages} />
+                     updateMessages={updateMessages}
+                     setInitialChat={setInitialChat}
+                 />
              } )
         } else {
             return <div>Inserisci il tuo primo amico!</div>

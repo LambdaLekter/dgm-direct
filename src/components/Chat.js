@@ -8,9 +8,8 @@ import '../style/Navbar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row, Navbar} from "react-bootstrap";
 
-export default function Chat({messages, setMessages, loggedUser, receiver, friendless}) {
+export default function Chat({messages, setMessages, loggedUser, receiver, chatSet}) {
     const chatRef = useRef(null);
-    const [firstScroll, setFirstScroll] = useState(false);
 
     const scrollToBottom = () => {
         if (chatRef.current) {
@@ -56,16 +55,16 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
         <Container fluid>
             <Row>
                 <Col style={{padding: 0}}>
-                    {!friendless &&
+                    {!chatSet.initialChat &&
                         <Navbar className="navbar-chat">
                             <div className="user">{receiver}</div>
                         </Navbar>
                     }
 
-                    <div id="chat-wrapper"  onContextMenu={e => e.preventDefault()}>
-                        {friendless ?
+                    <div id="chat-wrapper" onContextMenu={e => e.preventDefault()}>
+                        {chatSet.initialChat ?
                             (<div id="friendless-message">
-                                Aggiungi un amico per iniziare a chattare!
+                                Aggiungi un amico o seleziona una chat <br/>per iniziare a chattare!
                             </div>) :
                             (<div id="messages" ref={chatRef}>
                                 {messages.map((message, idx) => {
@@ -74,7 +73,11 @@ export default function Chat({messages, setMessages, loggedUser, receiver, frien
                                 })}
                             </div>)
                         }
-                        {!friendless && <div id="message-bar"><MessageBar submitHandler={sendMessage}/></div>}
+                        {!chatSet.initialChat &&
+                            <div id="message-bar">
+                                <MessageBar submitHandler={sendMessage}/>
+                            </div>
+                        }
                     </div>
                 </Col>
             </Row>

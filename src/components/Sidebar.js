@@ -4,7 +4,8 @@ import FriendsBar from "./FriendsBar";
 import ChatsList from "./ChatsList";
 
 const init_chats = [
-    { user: {
+    {
+        user: {
             _id: "649972077a92e418bbb3e00e",
             firstName: "Sara",
             lastName: "capiamo",
@@ -15,8 +16,10 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        }, message: {}},
-    { user: {
+        }, message: {}
+    },
+    {
+        user: {
             _id: "649972077a92e418bbb3e00e",
             firstName: "Sara",
             lastName: "capiamo",
@@ -27,8 +30,10 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        }},
-    { user: {
+        }
+    },
+    {
+        user: {
             _id: "64970a32e2b1ba30107e22f7",
             firstName: "Bruno",
             lastName: "password",
@@ -40,8 +45,10 @@ const init_chats = [
                 "649c5b58a16ded706a4d619d"
             ],
             __v: 0
-    } },
-    { user: {
+        }
+    },
+    {
+        user: {
             _id: "649972077a92e418bbb3e00e",
             firstName: "Sara",
             lastName: "capiamo",
@@ -52,8 +59,10 @@ const init_chats = [
                 "64970a32e2b1ba30107e22f7"
             ],
             __v: 0
-        }},
-    { user: {
+        }
+    },
+    {
+        user: {
             _id: "64970a32e2b1ba30107e22f7",
             firstName: "Bruno",
             lastName: "password",
@@ -65,36 +74,36 @@ const init_chats = [
                 "649c5b58a16ded706a4d619d"
             ],
             __v: 0
-        } }
+        }
+    }
 ]
 
-export default function Sidebar({loggedUser, selectedTab, friendsStates, chatsStates, setReceiver, updateMessages}) {
+export default function Sidebar({loggedUser, selectedTab, friendsStates, chatSet, setReceiver, updateMessages}) {
     return (
         <div>
             <Navbar selectedTab={selectedTab}/>
             <div id="side-list">
                 { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
-                { selectedTab === "F" &&
+                {selectedTab === "F" &&
                     <FriendsBar
                         loggedUser={loggedUser}
                         friends={friendsStates.friends}
                         setFriends={friendsStates.setFriends}
-                        setFriendless={friendsStates.setFriendless}
+                        setInitialChat={chatSet.setInitialChat}
                         setReceiver={setReceiver}
-                        updateMessages={updateMessages} />
+                        updateMessages={updateMessages}/>
                 }
-                { selectedTab === "C" &&
+                {selectedTab === "C" &&
                     <ChatsList
                         className="side-list-chats"
                         loggedUser={loggedUser}
-                        chats={chatsStates.chats}
-                        setChats={chatsStates.setChats}
-                        chatless={chatsStates.chatless}
-                        setChatless={chatsStates.setChatless}
+                        chats={chatSet.chats}
+                        setChats={chatSet.setChats}
+                        setInitialChat={chatSet.setInitialChat}
                         setReceiver={setReceiver}
-                        updateMessages={updateMessages} />
+                        updateMessages={updateMessages}/>
                 }
-                { selectedTab === "N" &&
+                {selectedTab === "N" &&
                     <div> Coming soon... </div>
                 }
             </div>

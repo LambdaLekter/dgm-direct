@@ -2,9 +2,9 @@ import ChatsListItem from "./ChatsListItem";
 import {useState} from "react";
 import ChatListItem from "./ChatsListItem";
 
-export default function ChatsList({chats, loggedUser, setReceiver, updateMessages}) {
+export default function ChatsList({chats, loggedUser, setReceiver, updateMessages, setInitialChat}) {
     const getChatsItems = () => {
-        if(chats && chats.length > 0){
+        if (chats && chats.length > 0) {
             return chats.map((chat, idx) => {
                 return <ChatListItem
                     key={"chat" + idx}
@@ -12,8 +12,10 @@ export default function ChatsList({chats, loggedUser, setReceiver, updateMessage
                     chatUser={chat.user}
                     chatMessage={chat.message}
                     setReceiver={setReceiver}
-                    updateMessages={updateMessages} />
-            } )
+                    updateMessages={updateMessages}
+                    setInitialChat={setInitialChat}
+                />
+            })
         } else {
             return <div>Seleziona un amico per iniziare a chattare!</div>
         }
@@ -21,7 +23,7 @@ export default function ChatsList({chats, loggedUser, setReceiver, updateMessage
 
     return (
         <>
-            { getChatsItems() }
+            {getChatsItems()}
         </>
     )
 }

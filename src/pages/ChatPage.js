@@ -16,8 +16,7 @@ export default function ChatPage() {
     const [friends, setFriends] = useState([])
     const [chats, setChats] = useState([])
     const [messages, setMessages] = useState([])
-    const [friendless, setFriendless] = useState(false)
-    const [chatless, setChatless] = useState(false)
+    const [initialChat, setInitialChat] = useState(true)
     const [selectedTab, setSelectedTab] = useState("C")
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -42,14 +41,13 @@ export default function ChatPage() {
                 if(chatsData.length > 0) {
                     receiverUser = chatsData[0].user.username
                 } else {
-                    setChatless(true)
+                    setInitialChat(true)
                     receiverUser = friendsData[0].username
                 }
                 setReceiver(receiverUser)
                 await updateMessages(loggedUser, receiverUser)
             } else {
-                setFriendless(true)
-                setChatless(true)
+                setInitialChat(true)
             }
         }
 
@@ -66,8 +64,8 @@ export default function ChatPage() {
         init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
     }, [])
 
-    const friendsStates = {friends, setFriends, setFriendless}
-    const chatsStates = {chats, setChats, chatless, setChatless}
+    const friendsStates = {friends, setFriends}
+    const chatSet = {chats, setChats, initialChat, setInitialChat}
 
     return (
         <>
@@ -83,7 +81,7 @@ export default function ChatPage() {
                                 loggedUser={loggedUser}
                                 selectedTab={selectedTab}
                                 friendsStates={friendsStates}
-                                chatsStates={chatsStates}
+                                chatSet={chatSet}
                                 setReceiver={setReceiver}
                                 updateMessages={updateMessages}
                             />
@@ -95,7 +93,7 @@ export default function ChatPage() {
                                 setMessages={setMessages}
                                 loggedUser={loggedUser}
                                 receiver={receiver}
-                                friendless={friendless}
+                                chatSet={chatSet}
                             />
                         </Col>
                     </Row>
@@ -108,5 +106,3 @@ export default function ChatPage() {
 // TODO: Sistemare l'input text usato per la ricerca di un nuovo amico
 // TODO: Mantenere lo stato di selezionato sui pulsanti nella ButtonsBar
 // TODO: Inserire lo stato di selezionato sulle chat nella lista
-// TODO: bypassare la scritta per friendless se esiste una chat
-// TODO: Sistemare message-bar che, in assenza di messaggi, si sposta in alto (ricordare le modifiche fatte su chat-wrapper)

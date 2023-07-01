@@ -3,7 +3,7 @@
     height: 8vh;
     padding-left: 15px;
     background-color: #2a2a32;
-    border-style: none solid solid none;
+    border-bottom-style: solid;
     border-width: 1px;
     border-color: #40454d;
     z-index: 3;
@@ -17,7 +17,7 @@
 .navbar-chat {
     height: 8vh;
     background-color: #2a2a32;
-    border-style: none solid solid none;
+    border-style: none none solid solid;
     border-width: 1px;
     z-index: 2;
     box-shadow: #202227 0 1px 7px;
