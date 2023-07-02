@@ -6,7 +6,7 @@
 
 * ### Inserire un nuovo utente
   Method: POST \
-  URL: _host_ / api / users / addUser \
+  URI: _host_ / api / users / addUser \
   body: { \
   "firstName" : "...", \
   "lastName"  : "...", \
@@ -15,38 +15,38 @@
   "password"  : "..." \
   }
 
-* ### Aggiungere un amico alla lista di un utente
-  Method: POST \
-  URL: _host_ / api / users / addFriend \
-  body: { \
-  "username": "...", \
-  "newFriend": "..." \
-  }
-
-* ### Rimuovere un amico alla lista di un utente
-  Method: POST \
-  URL: _host_ / api / users / removeFriend \
-  body: { \
-  "username": "...", \
-  "friend": "..." \
-  }
-
-* ### Estrarre gli amici di un utente a partire dal suo username
-  Method: POST \
-  URL: _host_ / api / users / getFriends / :username \
-  body: null
-
 * ### Verifica le credenziali di un utente
   Method: POST \
-  URL: _host_ / api / users / login \
+  URI: _host_ / api / users / login \
   body: { \
   "username": "...", \
   "password": "..." \
   }
 
-* ### Estrarre le informazioni di un utente a partire dal suo username
+* ### Aggiungere un amico alla lista di un utente dati gli username
   Method: POST \
-  URL: _host_ / api / users / :username \
+  URI: _host_ / api / users / addFriend \
+  body: { \
+  "username": "...", \
+  "newFriend": "..." \
+  }
+
+* ### Rimuovere un amico alla lista di un utente dati gli username
+  Method: POST \
+  URI: _host_ / api / users / removeFriend \
+  body: { \
+  "username": "...", \
+  "friend": "..." \
+  }
+
+* ### Estrarre gli amici di un utente dato il suo username
+  Method: POST \
+  URI: _host_ / api / users / getFriends / :username \
+  body: null
+
+* ### Estrarre le chat attive di un utente dato il suo username
+  Method: POST \
+  URI: _host_ / api / users / getChats / :username \
   body: null
 
 ---
@@ -55,7 +55,7 @@
 
 * ### Aggiungere un nuovo messaggio
   Method: POST \
-  URL: _host_ / api / messages / addMessage \
+  URI: _host_ / api / messages / addMessage \
   body: { \
   "author"  : [_ObjectID_], \
   "receiver"  : [_ObjectID_], \
@@ -63,13 +63,17 @@
   "time"  : [_ms_] \
   }
 
-* ### Estrarre una chat (lista di messaggi) a partire dagli username di mittente e destinatario
+* ### Estrarre una chat fra due utenti dati gli username
   Method: POST \
-  URL: _host_ / api / messages / :user1 / :user2 \
+  URI: _host_ / api / messages / :user1 / :user2 \
   body: null \
-  ( _user1_ e _user2_ sono gli username degli utenti
-  fra cui avviene la comunicazione )
 
+* ### Eliminare un messaggio dato il suo identificatore
+  Method: POST \
+  URI: _host_ / api / messages / deleteMessage \
+  body: { \
+  "id": "..."
+  }
 ---
 
 ## Esempio di richiesta

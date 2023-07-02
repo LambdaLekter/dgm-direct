@@ -11,6 +11,7 @@ router.post('/addUser', usersController.addUser)
 router.post('/addFriend', usersController.addFriendToUser)
 router.post('/removeFriend', usersController.removeFriendFromUser)
 router.post('/getFriends/:username', usersController.getFriendsByUsername)
+router.post('/getNotFriends/:username', usersController.getNotFriendsByUsername)
 router.post('/login', usersController.validateLogin)
 router.post('/getChats/:username', usersController.getChatsByUsername)
 

@@ -41,13 +41,13 @@ module.exports = {
     * */
     addFriendToUser: async (req, res) => {
         try {
-            let friend = await User.findOne({ username: req.body.newFriend })
             let user = await User.findOne({ username: req.body.username })
+            let friend = await User.findOne({ username: req.body.newFriend })
 
             // eseguiamo l'aggiunta solo se l'utente esiste e non è già un amico
             if (friend) {
-                if (user.friends.includes(friend._id)) {
-                    res.status(409).send() // Conflict: l'utente è già un amico
+                if (user.friends.includes(friend._id) || friend._id === user._id) {
+                    res.status(409).send() // Conflict: l'utente è già un amico, o è l'utente autenticato
                 } else {
                     await User.findOneAndUpdate(
                         {username: req.body.username},
@@ -107,5 +107,11 @@ module.exports = {
         } catch (error) {
             res.send(`<h1>${error}</h1>`)
         }
+    },
+
+    getNotFriendsByUsername: async (req, res) => {
+        const user = await User.findOne({username: req.params.username})
+        const users = await User.find({$and: [{_id: {$ne: user._id}}, {_id: {$nin: user.friends}}]})
+        res.status(200).json(users)
     }
 }
