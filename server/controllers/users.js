@@ -45,14 +45,22 @@ module.exports = {
     * */
     addFriendToUser: async (req, res) => {
         try {
-            let friend = await User.findOne({username: req.body.newFriend})
-            // If aggiunto da Domenico per provare a sistemare, ma nulla
+            let friend = await User.findOne({ username: req.body.newFriend })
+            let user = await User.findOne({ username: req.body.username })
+
+            // eseguiamo l'aggiunta solo se l'utente esiste e non è già un amico
             if (friend) {
-                await User.findOneAndUpdate(
-                    {username: req.body.username},
-                    {$push: {friends: friend._id}}
-                );
-                res.status(200).json(friend)
+                if (user.friends.includes(friend._id)) {
+                    res.status(409).send() // Conflict: l'utente è già un amico
+                } else {
+                    await User.findOneAndUpdate(
+                        {username: req.body.username},
+                        {$push: {friends: friend._id}}
+                    )
+                    res.status(200).json(friend) // Ok: aggiunta dell'utente agli amici
+                }
+            } else {
+                res.status(404).send() // Not Found: l'utente non esiste
             }
         } catch (err) {
             res.send(`<h1>${err}</h1>`)
@@ -62,7 +70,7 @@ module.exports = {
     removeFriendFromUser: async (req, res) => {
         try {
             let friend = await User.findOne({username: req.body.friend})
-            let update = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 {username: req.body.username},
                 {$pull: {friends: friend._id}}
             )

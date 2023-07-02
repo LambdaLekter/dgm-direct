@@ -4,6 +4,7 @@ import MessageBar from "./MessageBar";
 import axios from "axios";
 import '../style/Chat.css'
 import '../style/Navbar.css'
+import logoGrigio from "../img/logoGrigio.png"
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Col, Row, Navbar} from "react-bootstrap";

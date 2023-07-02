@@ -34,16 +34,6 @@ export default function ChatPage() {
         }
     };
 
-    const changeDocTitle = () => {
-        if (selectedTab === "C") {
-            document.title = 'DGM Direct - Le tue chat';
-        } else if(selectedTab === "F") {
-            document.title = 'DGM Direct - I tuoi amici';
-        } else if (selectedTab === "N") {
-            document.title = 'DGM Direct - Notifiche';
-        }
-    }
-
     useEffect(() => {
         const init = async (user) => {
             const friendsRes = await axios.post(`http://localhost:3001/api/users/getFriends/${user}`)
@@ -56,7 +46,7 @@ export default function ChatPage() {
 
             if (friendsData.length > 0) {
                 let receiverUser;
-                if(chatsData.length > 0) {
+                if (chatsData.length > 0) {
                     receiverUser = chatsData[0].user.username
                 } else {
                     setInitialChat(true)
@@ -84,6 +74,9 @@ export default function ChatPage() {
 
         init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
 
+    }, [])
+
+    useEffect(() => {
         document.addEventListener("keydown", handleEscape);
         return () => {
             document.removeEventListener("keydown", handleEscape);
@@ -91,7 +84,13 @@ export default function ChatPage() {
     }, [])
 
     useEffect(() => {
-        changeDocTitle()
+        if (selectedTab === "C") {
+            document.title = 'DGM Direct - Le tue chat';
+        } else if (selectedTab === "F") {
+            document.title = 'DGM Direct - I tuoi amici';
+        } else if (selectedTab === "N") {
+            document.title = 'DGM Direct - Notifiche';
+        }
     }, [selectedTab])
 
 
@@ -105,7 +104,11 @@ export default function ChatPage() {
                 <Container className="App" fluid>
                     <Row>
                         <Col md={1} id="button-bar-div" onContextMenu={e => e.preventDefault()}>
-                            <ButtonsBar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
+                            <ButtonsBar
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                setLoggedUser={setLoggedUser}
+                            />
                         </Col>
 
                         <Col md={3} id="side-tab" onContextMenu={e => e.preventDefault()}>

@@ -17,14 +17,95 @@
     font-weight: bold;
 }
 
+.list-message {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.friend-item {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.chat-item {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: min-content 1fr;
+    grid-row-gap: 0;
+
+    grid-template-areas:
+        "img username"
+        "img last-chat-message";
+}
+
 .userChat > img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
+    grid-row: 1 / span 2;
+    grid-column: 1;
+}
+
+.username {
+    font-size: 1.1em;
+    font-weight: bold;
+    flex-grow: 2;
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .last-chat-message {
-    font-size: 13px;
+    font-size: 0.9em;
     color: #868686;
+    grid-row: 2;
+    grid-column: 2;
+    overflow: hidden;
+}
+
+.delete-button {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: transparent;
+    color: #bb2d3b;
+}
+
+.delete-button:hover {
+    background-color: transparent;
+    color: #bb2d3b;
+    border: #bb2d3b 1px solid;
+}
+
+.delete-confirm {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: #157347 1px solid;
+    color: white;
+}
+
+.delete-confirm:hover {
+    background-color: white;
+    color: #157347;
+    border: #157347 2px solid;
+}
+
+.delete-cancel {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: #bb2d3b 1px solid;
+    color: white;
+}
+
+.delete-cancel:hover {
+    background-color: white;
+    color: #bb2d3b;
+    border: #bb2d3b 2px solid;
 }

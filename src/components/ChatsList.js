@@ -1,3 +1,5 @@
+/* * Componente utilizzato per */
+
 import ChatsListItem from "./ChatsListItem";
 
 export default function ChatsList({
@@ -17,7 +19,7 @@ export default function ChatsList({
 
     const getChatsItems = () => {
         if (chats && chats.length > 0) {
-            return chats.map((chat, idx) => {
+            return chats.map((chat) => {
                 return <ChatsListItem
                     key={chat.user.username}
                     loggedUser={loggedUser}

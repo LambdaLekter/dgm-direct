@@ -21,8 +21,6 @@ export default function SignUpForm() {
     const cookies = new Cookies();
 
     useEffect(() => {
-        document.title = 'DGM Direct | Registrazione';
-
         // Verifica se il cookie è impostato
         if(cookies.get("username")) {
             console.log(cookies.get("username"))

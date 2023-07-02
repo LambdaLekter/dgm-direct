@@ -7,7 +7,7 @@ import '../style/ButtonsBar.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComments, faUserGroup, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 
-export default function ButtonsBar({selectedTab, setSelectedTab,setLoggedUser}) {
+export default function ButtonsBar({selectedTab, setSelectedTab, setLoggedUser}) {
     const navigate = useNavigate()
     const cookie = new Cookies()
 

@@ -14,7 +14,6 @@ export default function Sidebar({
                                 }) {
 
     const handleSelectChat = (chatId) => {
-        console.log(chatId)
         chatList.setSelectedChat(chatId);
     };
 

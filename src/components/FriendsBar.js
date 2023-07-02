@@ -40,9 +40,9 @@ export default function FriendsBar({
     // ! Funzione per mostrare, staticamente, gli utenti amici del loggato
     const getFriendsItems = () => {
         if (friends && friends.length > 0) {
-            return friends.map((friend, idx) => {
-                return <ChatListItem
-                    key={friend.username}
+            return friends.map((friend) => {
+                return <ChatsListItem
+                    key={"friend"+friend.username}
                     loggedUser={loggedUser}
                     chatUser={friend}
                     setReceiver={setReceiver}
@@ -100,7 +100,7 @@ export default function FriendsBar({
                 <InputGroup>
                     <Form.Control
                         type="text"
-                        placeholder="Scrivi un messaggio..."
+                        placeholder="Aggiungi un amico..."
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
                         autoComplete="off"
