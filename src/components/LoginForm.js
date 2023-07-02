@@ -9,7 +9,7 @@ import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 
 import Cookies from 'universal-cookie'
 
-export default function LoginForm(props) { // eslint-disable-next-line
+export default function LoginForm() { // eslint-disable-next-line
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [validated, setValidated] = useState(false);

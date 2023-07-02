@@ -1,7 +1,6 @@
 const User = require('../models/users')
 const Message = require("../models/messages")
 const bcrypt = require('bcryptjs');
-const {uniqueUsers} = require("../../src/utils");
 
 module.exports = {
     /* * Funzioni per l'aggiunta di un nuovo utente al DB (addUser), ovvero al termine della procedura di registrazione,
@@ -22,17 +21,14 @@ module.exports = {
     },
 
     validateLogin: async (req, res) => {
-        const user = await User.findOne({username: req.body.username})
+        const user = await User.findOne({ username: req.body.username })
 
         if (!user) {
-            return res.status(404).json({error: 'Utente non trovato'});
+            return res.status(404).json({ error: 'Utente non trovato' })
         } else {
-            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-
-            if (!isPasswordValid) {
-                return res.status(401).json({error: 'Password non valida'});
-            }
-            res.status(200).json({message: 'Accesso effettuato con successo'})
+            const valid = await bcrypt.compare(req.body.password, user.password)
+            if (!valid) res.status(401).json({ error: 'Password non valida' })
+            else res.status(200).json({message: 'Accesso effettuato con successo'})
         }
     },
 
@@ -74,7 +70,7 @@ module.exports = {
                 {username: req.body.username},
                 {$pull: {friends: friend._id}}
             )
-            res.status(200).json(update)
+            res.status(200).json(friend)
         } catch (err) {
             res.send(`<h1>${err}</h1>`)
         }

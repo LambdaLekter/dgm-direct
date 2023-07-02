@@ -12,8 +12,7 @@ export default function Authentication({login}) {
     * */
     return (
         <>
-            {props.login ? <LoginForm/> : <SignUpForm/>
-            }
+            { login ? <LoginForm/> : <SignUpForm/> }
         </>
     )
 }

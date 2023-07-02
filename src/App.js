@@ -2,14 +2,10 @@ import './style/App.css'
 import {Routes, Route, Navigate} from 'react-router-dom'
 
 import Authentication from "./pages/Authentication"
+import HomePage from "./pages/HomePage"
 import ChatPage from "./pages/ChatPage"
-import {useEffect} from "react";
 
 function App() {
-    useEffect(() => {
-        document.title = 'DGM Direct';
-    }, []);
-
     return (
         <>
             <Routes>

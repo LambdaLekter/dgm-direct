@@ -14,6 +14,7 @@ export default function ChatsListItem({
                                           setReceiver,
                                           updateMessages,
                                           setInitialChat,
+                                          friends, setFriends,
                                           isSelected,
                                           onSelect
                                       }) {

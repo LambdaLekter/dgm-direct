@@ -20,9 +20,7 @@ export default function ButtonsBar({selectedTab, setSelectedTab, setLoggedUser})
     const logout = () => {
         setLoggedUser("")
         cookie.remove("username")
-
-        // TODO: Reindirizzamento ad una pagina Home
-        navigate("/login")
+        navigate("/")
     }
 
     return (

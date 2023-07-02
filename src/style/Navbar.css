@@ -9,11 +9,12 @@
     z-index: 3;
 }
 
-.user {
-    font-size: 26px;
+.navbar-title {
+    font-size: 1.4em;
     font-weight: bold;
 }
 
+/* Navbar della chat */
 .navbar-chat {
     height: 8vh;
     background-color: #2a2a32;

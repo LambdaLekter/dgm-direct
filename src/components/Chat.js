@@ -58,15 +58,16 @@ export default function Chat({messages, setMessages, loggedUser, receiver, chatS
                 <Col style={{padding: 0}}>
                     {!chatSet.initialChat &&
                         <Navbar className="navbar-chat" onContextMenu={e => e.preventDefault()}>
-                            <div className="user">{receiver}</div>
+                            <div className="navbar-title">{receiver}</div>
                         </Navbar>
                     }
 
                     <div id="chat-wrapper" onContextMenu={e => e.preventDefault()}>
                         {chatSet.initialChat ?
                             (<div id="friendless-message" onContextMenu={e => e.preventDefault()}>
-                                Aggiungi un amico o seleziona una chat <br/>per iniziare a chattare!
-                            </div>) :
+                                <img alt="Logo Grigio" src={logoGrigio} />
+                                <div>Aggiungi un amico o seleziona una chat per iniziare a chattare!</div>
+                            </div> ) :
                             (<div id="messages" ref={chatRef}>
                                 {messages.map((message, idx) => {
                                     let side = message.author === loggedUser ? "right" : "left"

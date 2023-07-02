@@ -1,15 +1,14 @@
 import {useState} from "react";
-import ChatListItem from "./ChatsListItem";
+import ChatsListItem from "./ChatsListItem";
 import axios from "axios";
 import '../style/FriendsBar.css'
 
-import {Form, InputGroup, Button, ListGroup} from 'react-bootstrap'
+import {Button, Form, InputGroup} from 'react-bootstrap'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 export default function FriendsBar({
-                                       friends,
-                                       setFriends,
+                                       friends, setFriends,
                                        loggedUser,
                                        setInitialChat,
                                        setReceiver,
@@ -17,24 +16,28 @@ export default function FriendsBar({
                                        chatList,
                                        handleSelectChat
                                    }) {
+
     const [inputText, setInputText] = useState("")
+
     const onAddFriend = (event) => {
         event.preventDefault()
-        if (inputText !== "") {
-            let body = {
-                username: loggedUser,
-                newFriend: inputText
-            }
-            axios.post(`http://localhost:3001/api/users/addFriend`, body)
-                .then(res => {
-                    console.log(`Amico aggiunto: ${res.data}`)
-                    setFriends([...friends, res.data])
-                    setInputText("")
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+        if (inputText === "") return
+
+        let body = {
+            username: loggedUser,
+            newFriend: inputText
         }
+
+        axios.post(`http://localhost:3001/api/users/addFriend`, body)
+            .then(res => {
+                if(res.status !== 200) return
+                console.log(`Amico aggiunto: ${res.data.username}`)
+                setFriends([...friends, res.data])
+                setInputText("")
+            })
+            .catch(error => {
+                console.error(error)
+            });
     }
 
     // ! Funzione per mostrare, staticamente, gli utenti amici del loggato
@@ -46,6 +49,8 @@ export default function FriendsBar({
                     loggedUser={loggedUser}
                     chatUser={friend}
                     setReceiver={setReceiver}
+                    friends={friends}
+                    setFriends={setFriends}
                     setInitialChat={setInitialChat}
                     updateMessages={updateMessages}
                     onSelect={() => handleSelectChat(friend.username)}
@@ -53,7 +58,7 @@ export default function FriendsBar({
                 />
             })
         } else {
-            return <div>Inserisci il tuo primo amico!</div>
+            return <div className="list-message">Inserisci il tuo primo amico!</div>
         }
     }
 
@@ -113,7 +118,6 @@ export default function FriendsBar({
                     </Button>
                 </InputGroup>
             </Form>
-
 
             {/*<ListGroup>*/}
             {/*    {getFriendsItems()}*/}

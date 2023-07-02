@@ -1,10 +1,17 @@
 /* Chat.js che conterrà la chat */
 #friendless-message {
-    font-size: 30px;
     display: flex;
+    text-align: center;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 21px;
     height: 92vh;
+}
+
+#friendless-message img {
+    width: 250px;
+    height: 250px;
 }
 
 #messages {
@@ -23,6 +30,7 @@
 #message-bar {
     position: sticky;
     bottom: 0;
+    border-radius: 0;
 }
 
 #message-bar textarea {
@@ -39,7 +47,6 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-
 
 /* Contenitore della chat */
 #chat-wrapper {

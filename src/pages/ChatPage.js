@@ -11,7 +11,7 @@ import {Container, Col, Row} from "react-bootstrap";
 import {uniqueChats} from "../utils";
 
 export default function ChatPage() {
-    const [loggedUser, setLoggedUser] = useState("fratm") // TODO rimuovere il valore di default
+    const [loggedUser, setLoggedUser] = useState("")
     const [receiver, setReceiver] = useState("")
     const [friends, setFriends] = useState([])
     const [chats, setChats] = useState([])
@@ -54,23 +54,24 @@ export default function ChatPage() {
                     receiverUser = friendsData[0].username
                 }
                 setReceiver(receiverUser)
-                await updateMessages(loggedUser, receiverUser)
+                await updateMessages(user, receiverUser)
             } else {
                 setInitialChat(true)
                 setSelectedChat(null)
             }
         }
 
-        // ! Verifica se il login è stato effettuato, altrimenti reindirizza alla pagina apposita
-        let loggedUsername = loggedUser
-        // if(!cookies.get("username")) {
-        //     console.log("Login non effettuato. Reindirizzamento...")
-        //     navigate("/login");
-        // } else {
-        //     loggedUsername = cookies.get("username")
-        //     setLoggedUser(loggedUsername)
-        // }
-
+        /* ? In questo passaggio, verifichiamo se il cookie è settato. Se non è settato, l'utente viene rimandato alla
+        ?    pagina di login nella quale fare accesso con le proprie credenziali
+        ? */
+        let loggedUsername = cookies.get("username")
+        if (!loggedUsername) {
+            console.log("Login non effettuato. Reindirizzamento...")
+            navigate("/login");
+            return
+        } else {
+            setLoggedUser(loggedUsername)
+        }
 
         init(loggedUsername).then(() => console.log("Inizializzazione effettuata"))
 

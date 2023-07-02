@@ -12,16 +12,11 @@ export default function ChatsList({
                                       handleSelectChat
                                   }) {
 
-    // const handleSelectChat = (chatId) => {
-    //     console.log(chatId)
-    //     setSelectedChat(chatId);
-    // };
-
     const getChatsItems = () => {
         if (chats && chats.length > 0) {
             return chats.map((chat) => {
                 return <ChatsListItem
-                    key={chat.user.username}
+                    key={"chat"+chat.user.username}
                     loggedUser={loggedUser}
                     chatUser={chat.user}
                     chatMessage={chat.message}
@@ -33,13 +28,9 @@ export default function ChatsList({
                 />
             })
         } else {
-            return <div>Seleziona un amico per iniziare a chattare!</div>
+            return <div className="list-message">Seleziona un amico per iniziare a chattare!</div>
         }
     }
 
-    return (
-        <>
-            {getChatsItems()}
-        </>
-    )
+    return ( <> {getChatsItems()} </> )
 }
