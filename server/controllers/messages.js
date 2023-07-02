@@ -12,7 +12,6 @@ module.exports = {
                     {author: user2._id, receiver: user1._id}
                 ]
             })
-
             messages = messages.map(message => {
                 return {
                     _id: message._id,
@@ -22,7 +21,6 @@ module.exports = {
                     time: message.time
                 }
             })
-
             res.status(200).json(messages)
         } catch (err) {
             res.send(`<h1>${err}</h1>`)
@@ -39,17 +37,6 @@ module.exports = {
             time: new Date(req.body.time)
         }).then(message => res.status(200).json(message))
     },
-
-    // * SOLUZIONE DI PARA
-    // removeMessageById: async (req, res) => {
-    //     try {
-    //         const message = await Message.remove({_id: req.body.id})
-    //         res.status(200).json(message)
-    //     } catch (err) {
-    //         res.send(`<h1>${err}</h1>`)
-    //     }
-    // }
-
 
     removeMessageById: (req, res) => {
         const {messageId} = req.body;

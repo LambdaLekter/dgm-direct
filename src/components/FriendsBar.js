@@ -1,9 +1,11 @@
+import {useState} from "react";
 import ChatListItem from "./ChatsListItem";
 import axios from "axios";
 import '../style/FriendsBar.css'
 
-import {Form, InputGroup, ListGroup} from 'react-bootstrap'
-import {useState} from "react";
+import {Form, InputGroup, Button, ListGroup} from 'react-bootstrap'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 export default function FriendsBar({
                                        friends,
@@ -18,21 +20,21 @@ export default function FriendsBar({
     const [inputText, setInputText] = useState("")
     const onAddFriend = (event) => {
         event.preventDefault()
-        let friend_input = event.target.firstElementChild
-        let body = {
-            username: loggedUser,
-            newFriend: friend_input.value
+        if (inputText !== "") {
+            let body = {
+                username: loggedUser,
+                newFriend: inputText
+            }
+            axios.post(`http://localhost:3001/api/users/addFriend`, body)
+                .then(res => {
+                    console.log(`Amico aggiunto: ${res.data}`)
+                    setFriends([...friends, res.data])
+                    setInputText("")
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
-        axios.post(`http://localhost:3001/api/users/addFriend`, body)
-            .then(res => {
-                console.log(`Amico aggiunto: ${res.data}`)
-                setFriends([...friends, res.data])
-                friend_input.value = ""
-                setInitialChat(false)
-            })
-            .catch(error => {
-                console.error(error);
-            });
     }
 
     // ! Funzione per mostrare, staticamente, gli utenti amici del loggato
@@ -86,16 +88,32 @@ export default function FriendsBar({
     return (
         <div id="friends-bar">
             <Form onSubmit={onAddFriend}>
+                {/*<InputGroup>*/}
+                {/*    <Form.Control*/}
+                {/*        type="text"*/}
+                {/*        placeholder="Cerca un amico da aggiungere..."*/}
+                {/*        value={inputText}*/}
+                {/*        onChange={e => setInputText(e.target.value)}*/}
+                {/*        autoComplete="off"*/}
+                {/*    />*/}
+                {/*</InputGroup>*/}
                 <InputGroup>
                     <Form.Control
                         type="text"
-                        placeholder="Cerca un amico da aggiungere..."
+                        placeholder="Scrivi un messaggio..."
                         value={inputText}
-                        onChange={e => setInputText(e.target.value)}
+                        onChange={(e) => setInputText(e.target.value)}
                         autoComplete="off"
                     />
+                    <Button
+                        type="submit"
+                        variant={inputText === "" ? "secondary" : "primary"}
+                        disabled={inputText === "" && true}>
+                        <FontAwesomeIcon icon={faUserPlus}/>
+                    </Button>
                 </InputGroup>
             </Form>
+
 
             {/*<ListGroup>*/}
             {/*    {getFriendsItems()}*/}

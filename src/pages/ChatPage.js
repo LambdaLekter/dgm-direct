@@ -135,5 +135,3 @@ export default function ChatPage() {
         </>
     )
 }
-
-// TODO: Sistemare l'input text usato per la ricerca di un nuovo amico

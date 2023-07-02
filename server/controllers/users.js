@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs');
 const {uniqueUsers} = require("../../src/utils");
 
 module.exports = {
+    /* * Funzioni per l'aggiunta di un nuovo utente al DB (addUser), ovvero al termine della procedura di registrazione,
+    *    e per la validazione del login (validateLogin), utilizzando la libreria "bcrypt" e implementando una funzione
+    *    di hashing della password memorizzata, ai fini della autenticazione sicura
+    * */
     addUser: async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -17,14 +21,39 @@ module.exports = {
         }).then(user => res.status(200).json(user))
     },
 
+    validateLogin: async (req, res) => {
+        const user = await User.findOne({username: req.body.username})
+
+        if (!user) {
+            return res.status(404).json({error: 'Utente non trovato'});
+        } else {
+            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+
+            if (!isPasswordValid) {
+                return res.status(401).json({error: 'Password non valida'});
+            }
+            res.status(200).json({message: 'Accesso effettuato con successo'})
+        }
+    },
+
+
+    /* *  Insieme di metodi utilizzati per la gestione dell'utente e degli amici:
+    *      - addFriendToUser: aggiunta amico all'array friends dell'utente loggato
+    *      - removeFriendFromUser: rimozione amico all'array friends dell'utente loggato
+    *      - getFriendsByUsername: usato per la visualizzazione delle amicizie relative all'utente loggato
+    *      - getChatsByUsername: restituisce le chat relative all'utente loggato, che sia mittente o destinatario
+    * */
     addFriendToUser: async (req, res) => {
         try {
             let friend = await User.findOne({username: req.body.newFriend})
-            await User.findOneAndUpdate(
-                {username: req.body.username},
-                {$push: {friends: friend._id}}
-            );
-            res.status(200).json(friend)
+            // If aggiunto da Domenico per provare a sistemare, ma nulla
+            if (friend) {
+                await User.findOneAndUpdate(
+                    {username: req.body.username},
+                    {$push: {friends: friend._id}}
+                );
+                res.status(200).json(friend)
+            }
         } catch (err) {
             res.send(`<h1>${err}</h1>`)
         }
@@ -51,21 +80,6 @@ module.exports = {
                     res.status(200).json(users)
                 })
             })
-    },
-
-    validateLogin: async (req, res) => {
-        const user = await User.findOne({username: req.body.username})
-
-        if (!user) {
-            return res.status(404).json({error: 'Utente non trovato'});
-        } else {
-            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-
-            if (!isPasswordValid) {
-                return res.status(401).json({error: 'Password non valida'});
-            }
-            res.status(200).json({message: 'Accesso effettuato con successo'})
-        }
     },
 
     getChatsByUsername: (req, res) => {
