@@ -1,0 +1,10 @@
+.container {
+    height: 100vh;
+    overflow: hidden;
+    background: rgb(250, 234, 58);
+}
+
+#logoPic {
+    width: 500px;
+    height: 500px;
+}
