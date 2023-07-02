@@ -44,6 +44,11 @@
   URI: _host_ / api / users / getFriends / :username \
   body: null
 
+* ### Estrarre tutti gli utenti, escluso l'utente dato e i suoi amici
+  Method: POST \
+  URI: _host_ / api / users / getNotFriends / :username \
+  body: null
+
 * ### Estrarre le chat attive di un utente dato il suo username
   Method: POST \
   URI: _host_ / api / users / getChats / :username \
