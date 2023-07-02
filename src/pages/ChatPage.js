@@ -90,7 +90,7 @@ export default function ChatPage() {
         } else if (selectedTab === "F") {
             document.title = 'DGM Direct - I tuoi amici';
         } else if (selectedTab === "N") {
-            document.title = 'DGM Direct - Notifiche';
+            document.title = 'DGM Direct - Aggiunta amico';
         }
     }, [selectedTab])
 

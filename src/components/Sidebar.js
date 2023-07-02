@@ -1,7 +1,8 @@
 import React from "react";
 import Navbar from "./Navbar"
-import FriendsBar from "./FriendsBar";
 import ChatsList from "./ChatsList";
+import FriendsBar from "./FriendsBar";
+import AddFriendBar from "./AddFriendBar";
 
 export default function Sidebar({
                                     loggedUser,
@@ -22,6 +23,20 @@ export default function Sidebar({
             <Navbar selectedTab={selectedTab}/>
             <div id="side-list">
                 { /* In base a quale pulsante viene premuto visualizziamo una scheda diversa (di default le chat) */}
+                {selectedTab === "C" &&
+                    <ChatsList
+                        className="side-list-chats"
+                        loggedUser={loggedUser}
+                        chats={chatSet.chats}
+                        setChats={chatSet.setChats}
+                        setInitialChat={chatSet.setInitialChat}
+                        setReceiver={setReceiver}
+                        updateMessages={updateMessages}
+
+                        chatList={chatList}
+                        handleSelectChat={handleSelectChat}
+                    />
+                }
                 {selectedTab === "F" &&
                     <FriendsBar
                         loggedUser={loggedUser}
@@ -34,21 +49,18 @@ export default function Sidebar({
                         chatList={chatList}
                         handleSelectChat={handleSelectChat}/>
                 }
-                {selectedTab === "C" &&
-                    <ChatsList
-                        className="side-list-chats"
+                {selectedTab === "N" &&
+                    <AddFriendBar
                         loggedUser={loggedUser}
-                        chats={chatSet.chats}
-                        setChats={chatSet.setChats}
+                        friends={friendsStates.friends}
+                        setFriends={friendsStates.setFriends}
                         setInitialChat={chatSet.setInitialChat}
                         setReceiver={setReceiver}
                         updateMessages={updateMessages}
 
                         chatList={chatList}
-                        handleSelectChat={handleSelectChat}/>
-                }
-                {selectedTab === "N" &&
-                    <div> Coming soon... </div>
+                        handleSelectChat={handleSelectChat}
+                    />
                 }
             </div>
         </div>

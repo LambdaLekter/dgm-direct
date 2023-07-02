@@ -3,7 +3,7 @@ import userImage from "../img/user.png";
 
 import {Button} from 'react-bootstrap'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faXmark, faUserMinus} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faXmark, faUserMinus, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {useState} from "react";
 
@@ -11,22 +11,26 @@ export default function ChatsListItem({
                                           loggedUser,
                                           chatUser,
                                           chatMessage,
+                                          chatNewFriend,
                                           setReceiver,
                                           updateMessages,
                                           setInitialChat,
                                           friends, setFriends,
                                           isSelected,
-                                          onSelect
+                                          onSelect,
+                                          onAddFriend
                                       }) {
 
     const [confirmDelete, setConfirmDelete] = useState(false);
 
     const changeReceiver = () => {
-        const receiverUser = chatUser.username
-        setInitialChat(false)
-        setReceiver(receiverUser)
-        updateMessages(loggedUser, receiverUser)
-        onSelect()
+        if (onSelect) {
+            const receiverUser = chatUser.username
+            setReceiver(receiverUser)
+            updateMessages(loggedUser, receiverUser)
+            setInitialChat(false)
+            onSelect()
+        }
     }
 
     const handleDelete = () => {
@@ -75,14 +79,22 @@ export default function ChatsListItem({
 
     return (
         <>
-            <div className={classes} onClick={changeReceiver}>
+            <div
+                className={!chatNewFriend ? classes : "newFriend"}
+                onClick={!chatNewFriend ? changeReceiver : null}
+            >
                 <img src={userImage} alt="proPic"/>
                 {chatUser ?
                     <div className="username">{chatUser.username}</div>
                     : <div>[Dati non trovati]</div>}
                 {chatMessage ?
                     <div className="last-chat-message">{chatMessage.text}</div> :
-                    showConfirmationButtons()
+                    // showConfirmationButtons()
+                    !chatNewFriend ?
+                        showConfirmationButtons() :
+                        <Button variant="success" className="add-friend" onClick={onAddFriend}>
+                            <FontAwesomeIcon icon={faUserPlus}/>
+                        </Button>
                 }
             </div>
         </>

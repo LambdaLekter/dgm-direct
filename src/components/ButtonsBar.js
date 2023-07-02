@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Nav} from 'react-bootstrap'
 import Cookies from 'universal-cookie'
 
 import '../style/ButtonsBar.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faComments, faUserGroup, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {faComments, faUserGroup, faUserPlus, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 
 export default function ButtonsBar({selectedTab, setSelectedTab, setLoggedUser}) {
     const navigate = useNavigate()
@@ -42,12 +42,12 @@ export default function ButtonsBar({selectedTab, setSelectedTab, setLoggedUser})
                 <FontAwesomeIcon icon={faUserGroup}/>
             </Button>
             <Button
-                title="Notifiche"
+                title="Aggiungi amico"
                 variant="primary"
                 size="md"
                 className={`rounded-circle mb-5 navbar-button ${selectedTab === "N" ? "selected-button" : ""}`}
                 onClick={getHandler("N")}>
-                <FontAwesomeIcon icon={faBell}/>
+                <FontAwesomeIcon icon={faUserPlus}/>
             </Button>
             <Button
                 title="Logout"

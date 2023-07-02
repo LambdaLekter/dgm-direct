@@ -36,6 +36,10 @@
 #message-bar textarea {
     resize: none;
     overflow-y: auto;
+    border-radius: 0;
+}
+#message-bar button {
+    border-radius: 0;
 }
 
 #message-bar textarea::-webkit-scrollbar, #message-bar input::-webkit-scrollbar {

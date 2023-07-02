@@ -3,9 +3,8 @@ import ChatsListItem from "./ChatsListItem";
 import axios from "axios";
 import '../style/FriendsBar.css'
 
-import {Button, Form, InputGroup} from 'react-bootstrap'
+import {Form, InputGroup} from 'react-bootstrap'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 export default function FriendsBar({
                                        friends, setFriends,
@@ -17,37 +16,42 @@ export default function FriendsBar({
                                        handleSelectChat
                                    }) {
 
-    const [inputText, setInputText] = useState("")
-
-    const onAddFriend = (event) => {
-        event.preventDefault()
-        if (inputText === "") return
-
-        let body = {
-            username: loggedUser,
-            newFriend: inputText
-        }
-
-        axios.post(`http://localhost:3001/api/users/addFriend`, body)
-            .then(res => {
-                if(res.status !== 200) return
-                console.log(`Amico aggiunto: ${res.data.username}`)
-                setFriends([...friends, res.data])
-                setInputText("")
-            })
-            .catch(error => {
-                console.error(error)
-            });
-    }
+    const [inputFriend, setInputFriend] = useState("")
 
     // ! Funzione per mostrare, staticamente, gli utenti amici del loggato
+    // const getFriendsItems = () => {
+    //     if (friends && friends.length > 0) {
+    //         return friends.map((friend) => {
+    //             return <ChatsListItem
+    //                 key={"friend"+friend.username}
+    //                 loggedUser={loggedUser}
+    //                 chatUser={friend}
+    //                 setReceiver={setReceiver}
+    //                 friends={friends}
+    //                 setFriends={setFriends}
+    //                 setInitialChat={setInitialChat}
+    //                 updateMessages={updateMessages}
+    //                 onSelect={() => handleSelectChat(friend.username)}
+    //                 isSelected={chatList.selectedChat === friend.username}
+    //             />
+    //         })
+    //     } else {
+    //         return <div className="list-message">Inserisci il tuo primo amico!</div>
+    //     }
+    // }
+
+    // ! Funzione per filtrare dinamicamente gli amici in base all'input nel Form.Control e si può facilmente
+    // ! adattare per cercare amici da aggiungere, cambiando ovviamente l'array di riferimento
     const getFriendsItems = () => {
-        if (friends && friends.length > 0) {
-            return friends.map((friend) => {
-                return <ChatsListItem
-                    key={"friend"+friend.username}
+        const filteredFriends = filterFriends();
+
+        if (filteredFriends.length > 0) {
+            return filteredFriends.map(friend => (
+                <ChatsListItem
+                    key={"friend" + friend.username}
                     loggedUser={loggedUser}
                     chatUser={friend}
+                    chatNewFriend={false}
                     setReceiver={setReceiver}
                     friends={friends}
                     setFriends={setFriends}
@@ -56,73 +60,30 @@ export default function FriendsBar({
                     onSelect={() => handleSelectChat(friend.username)}
                     isSelected={chatList.selectedChat === friend.username}
                 />
-            })
+            ))
         } else {
-            return <div className="list-message">Inserisci il tuo primo amico!</div>
+            return <div className="list-message">Nessun amico corrispondente trovato</div>;
         }
     }
-
-    // ! Funzione per filtrare dinamicamente gli amici in base all'input nel Form.Control e si può facilmente
-    // ! adattare per cercare amici da aggiungere, cambiando ovviamente l'array di riferimento
-    // const getFriendsItems = () => {
-    //     const filteredFriends = filterFriends();
-    //
-    //     if (filteredFriends.length > 0) {
-    //         return filteredFriends.map(friend => (
-    //             <ChatListItem
-    //                 key={friend.username}
-    //                 loggedUser={loggedUser}
-    //                 chatUser={friend}
-    //                 setReceiver={setReceiver}
-    //                 setInitialChat={setInitialChat}
-    //                 updateMessages={updateMessages}
-    //                 onSelect={() => handleSelectChat(friend.username)}
-    //                 isSelected={chatList.selectedChat === friend.username}
-    //             />
-    //         ))
-    //     } else {
-    //         return <div>Nessun amico corrispondente trovato.</div>;
-    //     }
-    // }
-    // const filterFriends = () => {
-    //     return friends.filter(friend =>
-    //         friend.username.toLowerCase().includes(inputText.toLowerCase())
-    //     )
-    // }
+    const filterFriends = () => {
+        return friends.filter(friend =>
+            friend.username.toLowerCase().includes(inputFriend.toLowerCase())
+        )
+    }
 
     return (
         <div id="friends-bar">
-            <Form onSubmit={onAddFriend}>
-                {/*<InputGroup>*/}
-                {/*    <Form.Control*/}
-                {/*        type="text"*/}
-                {/*        placeholder="Cerca un amico da aggiungere..."*/}
-                {/*        value={inputText}*/}
-                {/*        onChange={e => setInputText(e.target.value)}*/}
-                {/*        autoComplete="off"*/}
-                {/*    />*/}
-                {/*</InputGroup>*/}
+            <Form onSubmit={e => e.preventDefault()}>
                 <InputGroup>
                     <Form.Control
                         type="text"
-                        placeholder="Aggiungi un amico..."
-                        value={inputText}
-                        onChange={(e) => setInputText(e.target.value)}
+                        placeholder="Cerca tra i tuoi amici..."
+                        value={inputFriend}
+                        onChange={(e) => setInputFriend(e.target.value)}
                         autoComplete="off"
                     />
-                    <Button
-                        type="submit"
-                        variant={inputText === "" ? "secondary" : "primary"}
-                        disabled={inputText === "" && true}>
-                        <FontAwesomeIcon icon={faUserPlus}/>
-                    </Button>
                 </InputGroup>
             </Form>
-
-            {/*<ListGroup>*/}
-            {/*    {getFriendsItems()}*/}
-            {/*</ListGroup>*/}
-
             {getFriendsItems()}
         </div>
     )

@@ -12,7 +12,7 @@ export default function Navbar({selectedTab}) {
             <div className="navbar-title">
                 {selectedTab === "C" && <>Le tue chat</>}
                 {selectedTab === "F" && <>I tuoi amici</>}
-                {selectedTab === "N" && <>Notifiche</>}
+                {selectedTab === "N" && <>Aggiungi amico</>}
             </div>
         </div>
     )

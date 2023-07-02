@@ -1,7 +1,8 @@
 /* Visualizzazione del singolo messaggio */
 .message-item-left {
     position: relative;
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     margin-left: 25px;
     padding: 10px;
     background-color: #2a7768;
@@ -17,7 +18,8 @@
     color: black;
     display: inline-block;
     position: relative;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     margin-left: 55%;
     margin-right: 25px;
     padding: 10px;

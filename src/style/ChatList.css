@@ -11,6 +11,18 @@
     border-color: #40454d;
 }
 
+.newFriend {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: default;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #40454d;
+}
+
 .userChat:hover, .selected-chat {
     color: black;
     background-color: #bee1e6;
@@ -39,7 +51,7 @@
         "img last-chat-message";
 }
 
-.userChat > img {
+.userChat > img, .newFriend > img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -107,4 +119,19 @@
     background-color: white;
     color: #bb2d3b;
     border: #bb2d3b 2px solid;
+}
+
+.add-friend {
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: transparent;
+    color: #49c988;
+}
+
+.add-friend:hover {
+    background-color: transparent;
+    color: #0b5b37;
+    border: #0b5b37 1px solid;
 }
