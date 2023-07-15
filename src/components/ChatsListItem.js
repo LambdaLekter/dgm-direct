@@ -18,10 +18,31 @@ export default function ChatsListItem({
                                           friends, setFriends,
                                           isSelected,
                                           onSelect,
-                                          onAddFriend
+                                          inputAddFriend, setInputAddFriend
                                       }) {
 
     const [confirmDelete, setConfirmDelete] = useState(false);
+
+    const onAddFriend = (e) => {
+        e.preventDefault()
+        if (inputAddFriend === "") return
+
+        let body = {
+            username: loggedUser,
+            newFriend: chatUser.username
+        }
+
+        axios.post(`http://localhost:3001/api/users/addFriend`, body)
+            .then(res => {
+                if (res.status !== 200) return
+                console.log(`Amico aggiunto: ${res.data.username}`)
+                setFriends([...friends, res.data])
+                setInputAddFriend("")
+            })
+            .catch(error => {
+                console.error(error)
+            });
+    }
 
     const changeReceiver = () => {
         if (onSelect) {
@@ -42,7 +63,7 @@ export default function ChatsListItem({
             .then(res => {
                 setFriends([...friends].filter((friend) => friend._id !== res.data._id))
                 setInitialChat(true)
-                console.log(`Utente rimosso: ${res.data.username}`)
+                console.log(`Amico rimosso: ${res.data.username}`)
             })
             .catch(error => {
                 console.error(error);

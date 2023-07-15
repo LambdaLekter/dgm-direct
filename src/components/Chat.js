@@ -45,6 +45,9 @@ export default function Chat({messages, setMessages, loggedUser, receiver, chatS
             setMessages([...messages, message])
             msgInput.value = ""
             scrollToBottom()
+            if(!chatSet.chats.map(chat => chat.user.username).includes(receiver)) {
+                chatSet.setChats([...chatSet.chats, {user: {username: receiver}, message: message}])
+            }
         }
     }
 

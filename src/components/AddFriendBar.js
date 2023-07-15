@@ -18,27 +18,6 @@ export default function FriendsBar({
     const [inputAddFriend, setInputAddFriend] = useState("")
     const [filteredUsersItems, setFilteredUsersItems] = useState([]);
 
-    const onAddFriend = (e) => {
-        e.preventDefault()
-        if (inputAddFriend === "") return
-
-        let body = {
-            username: loggedUser,
-            newFriend: inputAddFriend
-        }
-
-        axios.post(`http://localhost:3001/api/users/addFriend`, body)
-            .then(res => {
-                if (res.status !== 200) return
-                console.log(`Amico aggiunto: ${res.data.username}`)
-                setFriends([...friends, res.data])
-                setInputAddFriend("")
-            })
-            .catch(error => {
-                console.error(error)
-            });
-    }
-
     // ! Funzione per filtrare dinamicamente gli amici in base all'input nel Form.Control e si può facilmente
     // ! adattare per cercare amici da aggiungere, cambiando ovviamente l'array di riferimento
     // const getFriendsItems = () => {
@@ -110,7 +89,7 @@ export default function FriendsBar({
             {/*</ListGroup>*/}
 
             <ListGroup>
-                {inputAddFriend === "" ? (
+                { inputAddFriend === "" ? (
                     <div className="list-message">Digita l'username per aggiungere<br />un amico</div>
                 ) : (
                     filteredUsersItems.length > 0 ? (
@@ -120,8 +99,11 @@ export default function FriendsBar({
                                 loggedUser={loggedUser}
                                 chatUser={user}
                                 chatNewFriend={true}
+                                friends={friends}
+                                setFriends={setFriends}
                                 setInitialChat={setInitialChat}
-                                onAddFriend={onAddFriend}
+                                inputAddFriend={inputAddFriend}
+                                setInputAddFriend={setInputAddFriend}
                             />
                         ))
                     ) : (
